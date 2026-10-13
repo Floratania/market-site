@@ -1,0 +1,22 @@
+{
+  "name": "vs-market-storefront",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "check": "node --check server.mjs && node --check public/app.js",
+    "test": "node --test tests/integration.test.mjs tests/catalog-ui.test.mjs tests/catalog-specifications.test.mjs tests/product-enrichment.test.mjs tests/product-pages.test.mjs tests/customer-auth.test.mjs tests/customer-orders.test.mjs tests/customer-selections-client.test.mjs tests/header-account.test.mjs tests/catalog-export.test.mjs tests/home.test.mjs tests/home-discovery.test.mjs tests/locations.test.mjs tests/checkout.test.mjs tests/checkout-http.test.mjs tests/manage.test.mjs tests/product-activation.test.mjs tests/product-editor.test.mjs",
+    "test:commerce": "node --test tests/commerce-polish.test.mjs tests/checkout-http.test.mjs tests/product-pages.test.mjs",
+    "saleor:start": "node start-saleor.mjs",
+    "pgadmin:start": "node start-pgadmin.mjs"
+  },
+  "dependencies": {
+    "mssql": "^12.7.4",
+    "nodemailer": "10.0.16"
+  }
+}

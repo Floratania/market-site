@@ -1,0 +1,22 @@
+import fs from 'node:fs/promises';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const base='http://127.0.0.1:8790',catalog=await(await fetch(base+'/api/catalog')).json();
+const elements=new Map(),events={};
+const element=key=>{
+ if(!elements.has(key))elements.set(key,{value:'',hidden:true,textContent:'',innerHTML:'',dataset:{},style:{},classList:{add(){},toggle(){},contains(){return false}},addEventListener(){},setAttribute(){},querySelector:()=>element('button'),querySelectorAll:()=>[],focus(){}});return elements.get(key);
+};
+const context=vm.createContext({document:{querySelector:element,querySelectorAll:()=>[],addEventListener:(name,fn)=>events[name]=fn,documentElement:{dataset:{theme:'dark'}},body:{style:{}}},location:{href:base+'/catalog',search:''},localStorage:{getItem:()=>null},URL,URLSearchParams,Intl,Date,fetch:async()=>({ok:true,json:async()=>catalog})});
+const source=await fs.readFile(new URL('../public/app.js',import.meta.url),'utf8');vm.runInContext(source,context);await vm.runInContext('catalogReady',context);
+vm.runInContext('browse("Двері")',context);
+const doorTypes=element('#construction-types').innerHTML;
+assert.equal((doorTypes.match(/data-construction-type/g)||[]).length,6);assert.doesNotMatch(doorTypes,/value="Вікно"/);assert.doesNotMatch(element('#filter-groups').innerHTML,/data-facet="spec:product_type"/);
+element('#construction-types').querySelectorAll=()=>[{value:'Двері технічні'}];
+events.change({target:{dataset:{constructionType:''}}});
+const selected=JSON.parse(vm.runInContext('JSON.stringify(catalogCards().matching)',context));
+assert.ok(selected.length);assert.ok(selected.every(p=>p.category==='Двері'&&p.specifications.some(s=>s.key==='product_type'&&s.value==='Двері технічні')));
+vm.runInContext('browse("Вікна")',context);
+assert.equal((element('#construction-types').innerHTML.match(/data-construction-type/g)||[]).length,1);assert.match(element('#construction-types').innerHTML,/value="Вікно"/);assert.doesNotMatch(element('#construction-types').innerHTML,/Двері технічні/);assert.equal(vm.runInContext('Object.hasOwn(state.facets,"spec:product_type")',context),false);
+const html=await(await fetch(base+'/catalog?v=16')).text();assert.ok(html.indexOf('id="construction-types"')>html.indexOf('class="catalog-tabs"'));assert.ok(html.indexOf('id="construction-types"')<html.indexOf('class="catalog-layout"'));assert.match(html,/app.js\?v=20261008-16/);
+assert.equal(await(await fetch(base+'/app.js?v=20261008-16')).text(),source);
+console.log(JSON.stringify({verified:true,doorTypes:6,windowTypes:1,technicalDoorVariants:selected.length,aboveFilters:true,categoryChangesClearOldType:true}));

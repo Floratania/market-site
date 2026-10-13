@@ -1,0 +1,2111 @@
+[
+  {
+    "source": "Catalog.Номенклатура.Attribute.Артикул",
+    "label": "Артикул",
+    "type": "xs:string 25 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14036"
+      ]
+    ],
+    "destination": "Публічне поле: article",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14036"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.АлкогольнаяПродукция",
+    "label": "Алкогольна продукція",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14037"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14037"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ВариантОграниченияСертификата",
+    "label": "Варіант обмеження сертифікату",
+    "type": "cfg:EnumRef.ВариантыОграниченийСкидокПоНоменклатуре",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14039"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14039RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ВариантПечатиНабора",
+    "label": "Варіант друку набору",
+    "type": "cfg:EnumRef.ВариантыПечатиНаборов",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14040"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14040RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ВерхняяГраницаОстатков",
+    "label": "Верхня межа залишків",
+    "type": "xs:decimal 15 2 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14041"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14041"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Вес",
+    "label": "Вага (кг)",
+    "type": "cfg:DefinedType.Вес",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14042"
+      ]
+    ],
+    "destination": "Публічне поле: weight",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14042"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Весовой",
+    "label": "Ваговий",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14043"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14043"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ВидАлкогольнойПродукции",
+    "label": "Вид алкогольної продукції",
+    "type": "cfg:CatalogRef.ВидыАлкогольнойПродукции",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14044"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14044RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ВидПродукции",
+    "label": "Вид продукції",
+    "type": "cfg:EnumRef.ВидыПродукции",
+    "physicalTokens": [
+      [
+        "Fld",
+        "19442"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld19442RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.АвтоматическиГенерироватьПартии",
+    "label": "Автоматично генерувати партії",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14045"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14045"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ВыписыватьГарантийныйТалон",
+    "label": "Виписувати гарантійний талон",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14046"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14046"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Высота",
+    "label": "Висота (см3)",
+    "type": "xs:decimal 10 1 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14047"
+      ]
+    ],
+    "destination": "Публічне поле: height",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14047"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ГарантийныйСрок",
+    "label": "Гарантійний термін",
+    "type": "xs:decimal 5 1 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14048"
+      ]
+    ],
+    "destination": "Публічне поле: warranty",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14048"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ДатаИзменения",
+    "label": "Дата зміни",
+    "type": "xs:dateTime DateTime",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14049"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14049"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ДатаОкончанияДействия",
+    "label": "Дата закінчення дії",
+    "type": "xs:dateTime Date",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14050"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14050"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Длина",
+    "label": "Довжина (см3)",
+    "type": "xs:decimal 10 1 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14051"
+      ]
+    ],
+    "destination": "Публічне поле: length",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14051"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИспользоватьСерииНоменклатуры",
+    "label": "Використовувати серії номенклатури",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14052"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14052"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Изготовитель",
+    "label": "Виготівник",
+    "type": "cfg:CatalogRef.СтруктурныеЕдиницы",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14053"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14053RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИмпортнаяАлкогольнаяПродукция",
+    "label": "Імпортна алкогольна продукція",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14054"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14054"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИсключитьИзПрайсЛистов",
+    "label": "Не використовувати в прайс-листах",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14055"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14055"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИспользоватьДатуПроизводстваПартии",
+    "label": "Використовувати дату виробництва партії",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14056"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14056"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИспользоватьНомерПартии",
+    "label": "Використовувати номер партії",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14057"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14057"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИспользоватьПартии",
+    "label": "Використовувати партії",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14058"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14058"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.НаименованиеПолное",
+    "label": "Найменування для друку",
+    "type": "xs:string 0 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14059"
+      ]
+    ],
+    "destination": "Публічне поле: name",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14059"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИспользоватьСрокГодностиПартии",
+    "label": "Вказувати термін придатності при реєстрації партій",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14060"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14060"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИспользоватьХарактеристики",
+    "label": "Використовувати характеристики",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14061"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14061"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.КатегорияНоменклатуры",
+    "label": "Категорія",
+    "type": "cfg:CatalogRef.КатегорииНоменклатуры",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14062"
+      ]
+    ],
+    "destination": "Публічне поле: category",
+    "liveViewColumn": "Категорія",
+    "liveSourceColumns": [
+      "_Reference159._Fld14062RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.КоличествоПериодовДействия",
+    "label": "Кількість періодів дії",
+    "type": "xs:decimal 3 0 Any",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14063"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14063"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Комментарий",
+    "label": "Опис",
+    "type": "xs:string 0 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14064"
+      ]
+    ],
+    "destination": "Публічне поле: description",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14064"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Крепость",
+    "label": "Міцність",
+    "type": "xs:decimal 5 3 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14065"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14065"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.МетодОценки",
+    "label": "Спосіб списання",
+    "type": "cfg:EnumRef.МетодОценкиЗапасов",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14066"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14066RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СтранаПроисхождения",
+    "label": "Країна походження",
+    "type": "cfg:CatalogRef.СтраныМира",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14067"
+      ]
+    ],
+    "destination": "Публічне поле: country",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14067RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.НаправлениеДеятельности",
+    "label": "Напрямок діяльності",
+    "type": "cfg:CatalogRef.НаправленияДеятельности",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14068"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14068RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Недействителен",
+    "label": "Недійсна",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14069"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14069"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.НижняяГраницаОстатков",
+    "label": "Нижня межа залишків",
+    "type": "xs:decimal 15 2 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14070"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14070"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Номинал",
+    "label": "Номінал",
+    "type": "xs:decimal 15 2 Any",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14071"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14071"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.НормаВремени",
+    "label": "Норма часу (ч)",
+    "type": "xs:decimal 10 3 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14072"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14072"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Объем",
+    "label": "Обсяг (м3)",
+    "type": "cfg:DefinedType.Объем",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14073"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14073"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ОбъемДАЛ",
+    "label": "Обсяг у декалітрах",
+    "type": "xs:decimal 18 6 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14074"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14074"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Периодичность",
+    "label": "Періодичність",
+    "type": "cfg:EnumRef.Периодичность",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14075"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14075RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Поставщик",
+    "label": "Постачальник",
+    "type": "cfg:CatalogRef.Контрагенты",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14076"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": "Постачальник",
+    "liveSourceColumns": [
+      "_Reference159._Fld14076RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ПроверятьЗаполнениеПартий",
+    "label": "Обов`язкове заповнення партій",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14077"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14077"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ПроверятьЗаполнениеХарактеристики",
+    "label": "Обов`язкове заповнення характеристики",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14078"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14078"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Производитель",
+    "label": "Виробник",
+    "type": "cfg:CatalogRef.Контрагенты",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14079"
+      ]
+    ],
+    "destination": "Публічне поле: manufacturer",
+    "liveViewColumn": "Виробник",
+    "liveSourceColumns": [
+      "_Reference159._Fld14079RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ПроизводительИмпортерАлкогольнойПродукции",
+    "label": "Виробник (імпортер)",
+    "type": "cfg:CatalogRef.Контрагенты",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14080"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14080RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ПроизвольныйНоминал",
+    "label": "Довільний номінал",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14081"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14081"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.РеквизитДопУпорядочиванияУНФ",
+    "label": "Порядок",
+    "type": "xs:decimal 7 0 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14082"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14082"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.РекомендуемЗаказать",
+    "label": "Рекомендуємо замовити",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14083"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14083"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Склад",
+    "label": "Склад",
+    "type": "cfg:CatalogRef.СтруктурныеЕдиницы",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14084"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14084RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СпособОграниченияСертификата",
+    "label": "Спосіб обмеження сертифікату",
+    "type": "cfg:EnumRef.СпособыОграниченияПодарочныхСертификатов",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14085"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14085RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СпособПополнения",
+    "label": "Спосіб поповнення",
+    "type": "cfg:EnumRef.СпособыПополненияЗапасов",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14086"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14086RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СпособРасчетаЦеныНабора",
+    "label": "Спосіб розрахунку ціни набору",
+    "type": "cfg:EnumRef.СпособыРасчетаЦеныНабора",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14087"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14087RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СрокДействияФлагаНовинка",
+    "label": "Прапорець \"Новинка\" дійсний до",
+    "type": "xs:dateTime Date",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14088"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14088"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СрокИсполненияЗаказа",
+    "label": "Термін виконання (дн.)",
+    "type": "xs:decimal 10 0 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14089"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14089"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СрокПополнения",
+    "label": "Термін поповнення (дн.)",
+    "type": "xs:decimal 10 0 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14090"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14090"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ВидСтавкиНДС",
+    "label": "Вид ставки ПДВ",
+    "type": "cfg:EnumRef.ВидыСтавокНДС",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14091"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14091RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СчетУчетаДоходов",
+    "label": "Рахунок обліку доходів",
+    "type": "cfg:ChartOfAccountsRef.Управленческий",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14092"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14092RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СчетУчетаЗапасов",
+    "label": "Рахунок обліку запасів",
+    "type": "cfg:ChartOfAccountsRef.Управленческий",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14093"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14093RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СчетУчетаЗатрат",
+    "label": "Рахунок обліку витрат",
+    "type": "cfg:ChartOfAccountsRef.Управленческий",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14094"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14094RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ТабачнаяПродукция",
+    "label": "Тютюнова продукція",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14095"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14095"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.УдалитьСтавкаНДС",
+    "label": "Вилучити ставка ПДВ",
+    "type": "cfg:CatalogRef.СтавкиНДС",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14096"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14096RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ТипСрокаДействия",
+    "label": "Тип терміну дії",
+    "type": "cfg:EnumRef.СрокДействияПодарочныхСертификатов",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14097"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14097RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ТолькоПоддержкаОстаткаПриРасчетеПотребностей",
+    "label": "Тільки підтримка залишку при розрахунку потреб",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14098"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14098"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.УдалитьСпецификация",
+    "label": "Вилучити специфікація",
+    "type": "cfg:CatalogRef.Спецификации",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14099"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14099RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ТипНоменклатуры",
+    "label": "Тип",
+    "type": "cfg:EnumRef.ТипыНоменклатуры",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14100"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14100RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ФайлКартинки",
+    "label": "Файл картинки",
+    "type": "cfg:CatalogRef.НоменклатураПрисоединенныеФайлы",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14101"
+      ]
+    ],
+    "destination": "Публічне поле: image",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14101RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ФиксированнаяСтоимость",
+    "label": "Використовувати фіксований спосіб розрахунку вартості",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14102"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14102"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ЦеноваяГруппа",
+    "label": "Цінова група",
+    "type": "cfg:CatalogRef.ЦеновыеГруппы",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14103"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14103RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ЧастичноеПогашение",
+    "label": "Часткове погашення",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14104"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14104"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Ширина",
+    "label": "Ширина (см3)",
+    "type": "xs:decimal 10 1 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14105"
+      ]
+    ],
+    "destination": "Публічне поле: width",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14105"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ЭтоНабор",
+    "label": "Це набір",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14106"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14106"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ЭтоНовинка",
+    "label": "Це новинка",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14107"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14107"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Ячейка",
+    "label": "Комірка",
+    "type": "cfg:CatalogRef.Ячейки",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14108"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14108RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ПодакцизныйТовар",
+    "label": "Підакцизний товар",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14109"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14109"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ПолитикаУчетаСерий",
+    "label": "Політика обліку серій",
+    "type": "cfg:CatalogRef.ПолитикаУчетаСерий",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14110"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14110RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИндивидуальныеНастройкиПолитикиУчетаСерий",
+    "label": "Індивідуальні налаштування політики обліку серій",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14111"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14111"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИспользоватьСрокГодностиСерии",
+    "label": "Використовувати термін придатності серії",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14112"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14112"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИспользоватьДатуПроизводстваСерии",
+    "label": "Використовувати дату виробництва серії",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14113"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14113"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ТочностьУказанияСрокаГодностиСерии",
+    "label": "Точність вказівки терміну придатності серії",
+    "type": "cfg:EnumRef.ТочностиУказанияСрокаГодности",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14114"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14114RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИспользоватьУникальныеСерии",
+    "label": "Використовувати унікальні серії",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14115"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14115"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ЭтоАгентскаяУслуга",
+    "label": "Це агентська послуга",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14116"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14116"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Договор",
+    "label": "Договір",
+    "type": "cfg:CatalogRef.ДоговорыКонтрагентов",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14117"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14117RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СрокГодности",
+    "label": "Термін придатності",
+    "type": "xs:decimal 15 0 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14118"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14118"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ЕдиницаИзмеренияСрокаГодности",
+    "label": "Одиниця виміру терміну придатності",
+    "type": "cfg:EnumRef.ЕдиницыИзмеренияВремени",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14119"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14119RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ВесПоСертификатуТовара",
+    "label": "Вага з сертифікату",
+    "type": "xs:decimal 21 11 Any",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14120"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14120"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.НаборЕдиницИзмерения",
+    "label": "Набір одиниць виміру",
+    "type": "cfg:CatalogRef.НаборыЕдиницИзмерения",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14122"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14122RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ИспользоватьНаборыЕдиницИзмерения",
+    "label": "Використовувати набори одиниць виміру",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14123"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14123"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ЕдиницаДляОтчетов",
+    "label": "Одиниця для звітів",
+    "type": "cfg:CatalogRef.ЕдиницыИзмерения",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14124"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14124RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.КоэффициентЕдиницыДляОтчетов",
+    "label": "Коефіцієнт одиниці для звітів",
+    "type": "xs:decimal 15 3 Nonnegative",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14125"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14125"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.Штрихкод",
+    "label": "Штрихкод",
+    "type": "xs:string 200 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14126"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14126"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ЕдиницаИзмерения",
+    "label": "Одиниця виміру",
+    "type": "cfg:CatalogRef.КлассификаторЕдиницИзмерения",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14038"
+      ]
+    ],
+    "destination": "Публічне поле: unit",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14038RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ТранспортнаяУслуга",
+    "label": "Транспортна послуга",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14127"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14127"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.НоменклатураГТД",
+    "label": "Код для ПН та РРО",
+    "type": "cfg:CatalogRef.КлассификаторУКТВЭД cfg:CatalogRef.НоменклатураГТД",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14128"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14128_TYPE",
+      "_Reference159._Fld14128_RTRef",
+      "_Reference159._Fld14128_RRRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.СтатьяДекларацииПоАкцизномуНалогу",
+    "label": "Стаття декларації по акцизному податку",
+    "type": "cfg:CatalogRef.СтатьиНалоговыхДеклараций",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14129"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14129RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.ЛьготаНДС",
+    "label": "Пільга по ПДВ",
+    "type": "xs:string 128 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14130"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14130"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.КодЛьготы",
+    "label": "Код пільги з ПДВ (згідно з Довідниками податкових пільг)",
+    "type": "xs:string 8 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14131"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14131"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.КалендарьСотрудника",
+    "label": "Календар",
+    "type": "cfg:CatalogRef.КалендариСотрудников",
+    "physicalTokens": [
+      [
+        "Fld",
+        "17267"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld17267RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.УказыватьШтрихкодАкцизнойМаркиПриПечатиЧека",
+    "label": "Вказувати штрихкод акцизної марки під час друку чека",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14132"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld14132"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.Attribute.НеВестиПоштучныйУчетВРазрезеQR_кодов",
+    "label": "Не вести поштучний облік в розрізі QR_кодів",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "21773"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159._Fld21773"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.TabularSection.ДополнительныеРеквизиты.Attribute.Свойство",
+    "label": "Властивість",
+    "type": "cfg:ChartOfCharacteristicTypesRef.ДополнительныеРеквизитыИСведения",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14135"
+      ]
+    ],
+    "destination": "Додаткові публічні характеристики після розшифрування та явного дозволу",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159_VT14133._Fld14135RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.TabularSection.ДополнительныеРеквизиты.Attribute.Значение",
+    "label": "Значення",
+    "type": "cfg:Characteristic.ДополнительныеРеквизитыИСведения",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14136"
+      ]
+    ],
+    "destination": "Додаткові публічні характеристики після розшифрування та явного дозволу",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159_VT14133._Fld14136_TYPE",
+      "_Reference159_VT14133._Fld14136_L",
+      "_Reference159_VT14133._Fld14136_N",
+      "_Reference159_VT14133._Fld14136_T",
+      "_Reference159_VT14133._Fld14136_S",
+      "_Reference159_VT14133._Fld14136_RTRef",
+      "_Reference159_VT14133._Fld14136_RRRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.TabularSection.ДополнительныеРеквизиты.Attribute.ТекстоваяСтрока",
+    "label": "Текстовий рядок",
+    "type": "xs:string 0 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14137"
+      ]
+    ],
+    "destination": "Додаткові публічні характеристики після розшифрування та явного дозволу",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159_VT14133._Fld14137"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.TabularSection.НоменклатураГруппыЦеновыеГруппы.Attribute.ЗначениеУточнения",
+    "label": "Значення уточнення",
+    "type": "cfg:CatalogRef.Номенклатура cfg:CatalogRef.КатегорииНоменклатуры cfg:CatalogRef.ЦеновыеГруппы",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14140"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159_VT14138._Fld14140_TYPE",
+      "_Reference159_VT14138._Fld14140_RTRef",
+      "_Reference159_VT14138._Fld14140_RRRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.Номенклатура.TabularSection.НоменклатураГруппыЦеновыеГруппы.Attribute.Характеристика",
+    "label": "Характеристика",
+    "type": "cfg:CatalogRef.ХарактеристикиНоменклатуры",
+    "physicalTokens": [
+      [
+        "Fld",
+        "14141"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference159_VT14138._Fld14141RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.НаименованиеДляПечати",
+    "label": "Найменування для друку",
+    "type": "xs:string 0 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "16483"
+      ]
+    ],
+    "destination": "Публічне поле: variantName",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld16483"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.Артикул",
+    "label": "Артикул",
+    "type": "xs:string 25 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "16484"
+      ]
+    ],
+    "destination": "Публічне поле: article",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld16484"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.ФайлКартинки",
+    "label": "Файл картинки",
+    "type": "cfg:CatalogRef.ХарактеристикиНоменклатурыПрисоединенныеФайлы",
+    "physicalTokens": [
+      [
+        "Fld",
+        "16485"
+      ]
+    ],
+    "destination": "Публічне поле: image",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld16485RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.Недействителен",
+    "label": "Недійсний",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "16486"
+      ]
+    ],
+    "destination": "Правила інтеграції; не публічне поле",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld16486"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.ОтечественныйНеподакцизныйТовар",
+    "label": "Вітчизняний непідакцизний товар",
+    "type": "xs:boolean",
+    "physicalTokens": [
+      [
+        "Fld",
+        "16487"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld16487"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.НоменклатураГТД",
+    "label": "Код для ПН (за-замовч.)",
+    "type": "cfg:CatalogRef.КлассификаторУКТВЭД cfg:CatalogRef.НоменклатураГТД",
+    "physicalTokens": [
+      [
+        "Fld",
+        "16488"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld16488_TYPE",
+      "_Reference273._Fld16488_RTRef",
+      "_Reference273._Fld16488_RRRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.НоменклатураНаОснованииХарактеристики",
+    "label": "Номенклатура на підставі характеристики",
+    "type": "cfg:CatalogRef.Номенклатура",
+    "physicalTokens": [
+      [
+        "Fld",
+        "17278"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld17278RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.Ширина",
+    "label": "Ширина",
+    "type": "xs:decimal 10 0 Any",
+    "physicalTokens": [
+      [
+        "Fld",
+        "17290"
+      ]
+    ],
+    "destination": "Публічне поле: width",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld17290"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.Высота",
+    "label": "Висота",
+    "type": "xs:decimal 10 0 Any",
+    "physicalTokens": [
+      [
+        "Fld",
+        "17291"
+      ]
+    ],
+    "destination": "Публічне поле: height",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld17291"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.Цвет",
+    "label": "Колір",
+    "type": "xs:string 50 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "17292"
+      ]
+    ],
+    "destination": "Публічне поле: color",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld17292"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.Профиль",
+    "label": "Профіль",
+    "type": "xs:string 50 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "17293"
+      ]
+    ],
+    "destination": "Публічне поле: profile",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld17293"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.Тип",
+    "label": "Тип",
+    "type": "xs:string 25 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "17294"
+      ]
+    ],
+    "destination": "Публічне поле: product_type",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld17294"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.ЗаказПокупателя",
+    "label": "Замовлення покупця",
+    "type": "cfg:DocumentRef.ЗаказПокупателя",
+    "physicalTokens": [
+      [
+        "Fld",
+        "19478"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld19478RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.НомерЗаказПокупателяПроизводство",
+    "label": "Номер замовлення покупця виробництва",
+    "type": "xs:string 20 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "19479"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld19479"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.НомерХарактеристикиПроизводство",
+    "label": "Номер характеристики виробництва",
+    "type": "xs:string 20 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "19480"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld19480"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.Attribute.СложностьПроукции",
+    "label": "Складність продукції",
+    "type": "cfg:CatalogRef.ОС_СложностьГотовойПродукции",
+    "physicalTokens": [
+      [
+        "Fld",
+        "19486"
+      ]
+    ],
+    "destination": "Внутрішнє поле; перевірити потребу адаптера",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273._Fld19486RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.TabularSection.ДополнительныеРеквизиты.Attribute.Свойство",
+    "label": "Властивість",
+    "type": "cfg:ChartOfCharacteristicTypesRef.ДополнительныеРеквизитыИСведения",
+    "physicalTokens": [
+      [
+        "Fld",
+        "16491"
+      ]
+    ],
+    "destination": "Додаткові публічні характеристики після розшифрування та явного дозволу",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273_VT16489._Fld16491RRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.TabularSection.ДополнительныеРеквизиты.Attribute.Значение",
+    "label": "Значення",
+    "type": "cfg:Characteristic.ДополнительныеРеквизитыИСведения",
+    "physicalTokens": [
+      [
+        "Fld",
+        "16492"
+      ]
+    ],
+    "destination": "Додаткові публічні характеристики після розшифрування та явного дозволу",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273_VT16489._Fld16492_TYPE",
+      "_Reference273_VT16489._Fld16492_L",
+      "_Reference273_VT16489._Fld16492_N",
+      "_Reference273_VT16489._Fld16492_T",
+      "_Reference273_VT16489._Fld16492_S",
+      "_Reference273_VT16489._Fld16492_RTRef",
+      "_Reference273_VT16489._Fld16492_RRRef"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  },
+  {
+    "source": "Catalog.ХарактеристикиНоменклатуры.TabularSection.ДополнительныеРеквизиты.Attribute.ТекстоваяСтрока",
+    "label": "Текстовий рядок",
+    "type": "xs:string 0 Variable",
+    "physicalTokens": [
+      [
+        "Fld",
+        "16493"
+      ]
+    ],
+    "destination": "Додаткові публічні характеристики після розшифрування та явного дозволу",
+    "liveViewColumn": null,
+    "liveSourceColumns": [
+      "_Reference273_VT16489._Fld16493"
+    ],
+    "liveCheckedAt": "2026-10-08T06:41:36.438Z"
+  }
+]

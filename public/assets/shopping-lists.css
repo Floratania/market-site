@@ -1,0 +1,36 @@
+.shopping-tools{display:flex;justify-content:flex-end;gap:12px;padding:10px 3.4%;border-bottom:1px solid var(--line);background:var(--paper)}
+.shopping-tools button,.shopping-tools a,.selection-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:8px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:14px;text-decoration:none}
+.selection-icon{width:20px;height:20px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.selection-button[aria-pressed="true"]{color:var(--red-text);border-color:var(--red-text);background:var(--soft)}
+.selection-button[aria-pressed="true"] .heart-icon{fill:currentColor}
+.product-selections{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.product-card .product-selections .selection-button{flex:1;font-size:12px;padding:7px 8px;gap:6px;min-width:0}
+.list-count{display:inline-grid;place-items:center;min-width:20px;height:20px;border-radius:20px;background:var(--soft);font-size:12px}
+.selection-status{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:120;width:max-content;max-width:calc(100vw - 32px);padding:12px 18px;border-radius:8px;background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:0 8px 30px #0003;font-size:14px}
+.shopping-dialog{box-sizing:border-box;width:min(1260px,96vw);max-width:96vw;max-height:92dvh;padding:24px;border:1px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);overflow:auto}
+.shopping-dialog::backdrop{background:#000b}
+body:has(.shopping-dialog[open]){overflow:hidden}
+.selection-inline-notice{border:1px solid var(--line);border-left:3px solid #ff0000;background:var(--soft);color:var(--ink);padding:10px 14px;border-radius:8px;font-size:14px}
+.shopping-dialog-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:8px}
+.shopping-dialog h2{margin:0;font-size:28px;line-height:1.2}.shopping-dialog-head button{min-width:44px;min-height:44px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.shopping-dialog-note{color:var(--muted);font-size:14px;margin:8px 0 20px}
+.favorites-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.favorites-grid .product-image{height:220px;aspect-ratio:auto;padding:20px}.favorites-grid .product-image>img{object-fit:contain}
+.comparison-options{display:flex;align-items:center;gap:8px;margin:14px 0;font-size:14px}.comparison-options input{accent-color:#ff0000;width:18px;height:18px}
+.comparison-scroll{overflow-x:auto}.comparison-table{border-collapse:separate;border-spacing:0;width:100%;font-size:14px}.comparison-table th,.comparison-table td{padding:14px;vertical-align:top;border-bottom:1px solid var(--line);text-align:left;min-width:210px;max-width:290px;overflow-wrap:anywhere}.comparison-table tr>th:first-child{min-width:150px;width:170px;color:var(--muted);font-weight:500}.comparison-table thead th{background:var(--surface)}.comparison-table tbody th{position:sticky;left:0;background:var(--paper)}
+.comparison-photo{display:flex;align-items:center;justify-content:center;height:180px;padding:12px;background:var(--soft);border-radius:8px;margin-bottom:14px}.comparison-photo img{width:100%;height:100%;object-fit:contain}.comparison-photo small{color:var(--muted);text-align:center;font-weight:400}.comparison-table h3{font-size:16px;margin:0 0 8px}.comparison-table h3 a:hover{color:var(--red-text)}.comparison-sku{font-size:12px;color:var(--muted);font-weight:400;display:block;margin:8px 0}.comparison-remove{padding:7px 10px;background:var(--surface);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-size:12px}.comparison-different td{background:var(--soft)}.comparison-price{font-weight:700}
+@media(max-width:760px){.shopping-tools{justify-content:center;padding:8px 16px;gap:8px}.shopping-tools button,.shopping-tools a{flex:1;padding:8px;font-size:13px}.shopping-dialog{padding:16px}.shopping-dialog h2{font-size:23px}.favorites-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.favorites-grid .product-image{height:180px;padding:12px}.product-card .product-selections{flex-direction:column}.comparison-table th,.comparison-table td{padding:10px;min-width:185px}.comparison-table tr>th:first-child{min-width:115px;width:115px}}
+@media(max-width:380px){.favorites-grid{grid-template-columns:1fr}}
+.site-header{flex-wrap:wrap;column-gap:16px;row-gap:10px}
+.site-header .shopping-tools{flex:0 0 auto;padding:0;border:0;background:transparent;gap:8px}
+.site-header .shopping-tools button,.site-header .shopping-tools a{padding:8px;min-height:44px;gap:5px;font-size:14px}
+.site-header .account-actions{display:flex;align-items:center;gap:4px;margin-left:auto;flex:0 0 auto}
+.site-header .header-logout{border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:14px}
+.site-header .account-actions .account-trigger{min-height:44px}
+.site-header .shopping-tools .cart-trigger{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px;gap:5px;font-size:14px;border-radius:8px}
+.site-header .shopping-tools .list-count{background:var(--soft);color:var(--ink);min-width:20px;padding:0;font-size:12px}
+.site-header .saved-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:760px){.site-header::before{content:"";order:2;flex-basis:100%;height:0}.site-header .shopping-tools{order:3;flex:0 1 auto;gap:6px;display:flex}.site-header .shopping-tools button,.site-header .shopping-tools a,.site-header .shopping-tools .cart-trigger{flex:0 0 auto;padding:6px;gap:4px;font-size:13px}.site-header .header-search{display:flex}.site-header .account-actions{order:4;margin-left:auto}.site-header .account-actions .header-logout>span{display:inline}.site-header .account-actions .account-trigger{padding:8px;gap:5px}.site-header .account-actions .account-trigger .ui-icon{width:20px}.site-header .account-actions .account-trigger .selection-icon{width:20px}.site-header .account-actions:not(.is-authenticated) .account-trigger>span{display:inline}}
+@media(max-width:380px){.site-header .account-actions{gap:0}.site-header .account-actions .account-trigger{padding:6px}}
+.site-header .header-logout[hidden]{display:none!important}
+.site-header .shopping-tools .cart-trigger>.list-count{display:inline-grid}
+@media(min-width:761px) and (max-width:1500px){.site-header nav{order:2;flex-basis:100%;padding-top:6px}.site-header .theme-toggle{margin-left:auto}}

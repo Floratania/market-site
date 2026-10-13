@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+import { spawn } from 'node:child_process';
+import path from 'node:path';
+const candidates = ['docker', `${process.env.LOCALAPPDATA}/Programs/DockerDesktop/resources/bin/docker.exe`, 'C:/Program Files/Docker/Docker/resources/bin/docker.exe'];
+const docker = candidates.slice(1).find((file) => fs.existsSync(file)) || candidates[0];
+const cwd = new URL('./saleor-platform/', import.meta.url);
+const run = (args) => new Promise((resolve, reject) => {
+  const child = spawn(docker, args, { cwd, stdio: 'inherit', windowsHide: true, env: { ...process.env, PATH: `${path.dirname(docker)}${path.delimiter}${process.env.PATH || ''}` } });
+  child.on('error', reject);
+  child.on('exit', (code) => code === 0 ? resolve() : reject(new Error(`Docker exited with ${code}`)));
+});
+await import('./configure-pgadmin.mjs');
+await run(['info', '--format', '{{.ServerVersion}}']);
+await run(['compose', '-p', 'vsmarket-local', 'up', '-d', 'db', 'cache', 'mailpit', 'jaeger']);
+await run(['compose', '-p', 'vsmarket-local', 'run', '--rm', 'api', 'python3', 'manage.py', 'migrate']);
+await run(['compose', '-p', 'vsmarket-local', 'up', '-d', 'api', 'worker', 'dashboard', 'pgadmin']);
+await run(['compose', '-p', 'vsmarket-local', 'ps']);
+console.log('Saleor API: http://127.0.0.1:8000/graphql/');
+console.log('Saleor Dashboard: http://127.0.0.1:9000/');
+console.log('pgAdmin: http://127.0.0.1:5050/');

@@ -1,0 +1,56 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import http from 'node:http';
+import {once} from 'node:events';
+import {spawn} from 'node:child_process';
+test('separate checkout persists canonical server prices and delivery, rejects cross-site requests and duplicate edits',async t=>{
+  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'vsmarket-checkout-http-'));
+  const settings=path.join(directory,'settings.json'),orders=path.join(directory,'orders');
+  await fs.writeFile(settings,JSON.stringify({email:{enabled:true,to:'owner@example.com',from:'shop@example.com',host:'127.0.0.1',port:1,user:'test',password:'test',secure:true},telegram:{enabled:false}}));
+  const source=http.createServer(async(req,res)=>{
+   let bytes='';for await(const chunk of req)bytes+=chunk;const {query,variables}=JSON.parse(bytes);
+   const user=id=>({id,email:id+'@example.com',firstName:'Test',lastName:'Buyer'});
+   let data;
+   if(query.includes('CustomerLogin')){const id=variables.email.startsWith('u2')?'u2':'u1';const token='header.'+Buffer.from(JSON.stringify({sub:id,exp:Math.floor(Date.now()/1000)+3600})).toString('base64url')+'.secret';data={tokenCreate:{token,user:user(id),errors:[]}};}
+   else if(query.includes('CustomerMe')){const id=JSON.parse(Buffer.from(req.headers.authorization.split('.')[1],'base64url')).sub;data={me:user(id)};}
+   else data={products:{pageInfo:{hasNextPage:false,endCursor:null},edges:[{node:{id:'p1',name:'Двері тест',slug:'test-door',category:{name:'Двері'},metadata:[],variants:[{id:'v1',name:'960 × 2050, праві',sku:'SKU-1',quantityAvailable:5,pricing:{price:{gross:{amount:150,currency:'UAH'}}}}]}}]}};
+   res.setHeader('Content-Type','application/json');res.end(JSON.stringify({data}));
+  });
+  source.listen(0,'127.0.0.1');await once(source,'listening');
+  const port=18794,base=`http://127.0.0.1:${port}`;
+  const child=spawn(process.execPath,['server.mjs'],{cwd:new URL('..',import.meta.url),env:{...process.env,PORT:String(port),STOREFRONT_PUBLIC_URL:base,SALEOR_GRAPHQL_URL:`http://127.0.0.1:${source.address().port}/graphql`,ORDER_SETTINGS_FILE:settings,ORDER_STORAGE_DIR:orders},stdio:'ignore'});
+  t.after(async()=>{child.kill();await once(child,'exit');await new Promise(resolve=>source.close(resolve));await fs.rm(directory,{recursive:true,force:true});});
+  let ready=false;for(let i=0;i<100;i++){try{if((await fetch(base+'/api/checkout')).ok){ready=true;break;}}catch{}await new Promise(resolve=>setTimeout(resolve,30));}assert.equal(ready,true);
+  const page=await(await fetch(base+'/checkout')).text();assert.match(page,/id="order-form"/);assert.match(page,/id="home-page" hidden/);assert.doesNotMatch(page,/id="checkout-dialog"/);assert.equal((await fetch(base+'/checkout.js')).status,200);assert.equal((await fetch(base+'/integration/order-settings.local.json')).status,404);
+  const info=await(await fetch(base+'/api/checkout')).json();assert.equal(info.acceptingOrders,true);assert.equal(info.email,undefined);
+  const proposal=await(await fetch(base+'/proposal')).text();assert.match(proposal,/id="proposal-page"/);assert.match(proposal,/proposal\.js/);
+  const payload={paymentMethod:'bank_transfer',requestId:'00000000-0000-4000-8000-000000000050',name:'Test buyer',phone:'+380501234567',email:'buyer@example.com',delivery:'nova_poshta',shipping:{kind:'branch',city:'Чернівці',warehouse:'Відділення №1'},consent:true,comment:'Test only',lines:[{sku:'SKU-1',quantity:2,unitPrice:1,name:'Forged'}]};
+  const quote=await fetch(base+'/api/quote',{method:'POST',headers:{'Content-Type':'application/json',Origin:base},body:JSON.stringify({lines:payload.lines})});assert.equal(quote.status,200);assert.equal((await quote.json()).total,300);
+  const post=(body,origin=base,cookie='')=>fetch(base+'/api/orders',{method:'POST',headers:{'Content-Type':'application/json',Origin:origin,...(cookie?{Cookie:cookie}:{})},body:JSON.stringify(body)});
+  assert.equal((await post(payload,'https://unrelated.example')).status,403);
+  assert.equal((await post({...payload,consent:false})).status,400);
+  assert.equal((await post({...payload,paymentMethod:'card'})).status,409);assert.equal((await post({...payload,paymentMethod:'cash_pickup'})).status,400);
+  assert.equal((await post({...payload,email:'bad\nheader'})).status,400);
+  assert.equal((await post({...payload,lines:[{sku:'SKU-1',quantity:2,expectedPrice:1}]})).status,409,'a changed price requires buyer confirmation before saving');
+  const demo=await fetch(base+'/?demo=1',{redirect:'manual'});assert.equal(demo.status,302);assert.equal(demo.headers.get('location'),'/');
+  assert.equal((await post(payload)).status,201);
+  assert.equal((await post(payload)).status,200);
+  assert.equal((await post({...payload,lines:[{sku:'SKU-1',quantity:3}]})).status,409);
+  const saved=JSON.parse(await fs.readFile(path.join(orders,payload.requestId+'.json'),'utf8'));
+  assert.equal(saved.order.lines[0].unitPrice,150);assert.equal(saved.order.lines[0].name,'Двері тест');assert.equal(saved.order.shipping.carrier,'nova_poshta');assert.equal(saved.order.shipping.verified,false);assert.equal(saved.order.customer.email,'buyer@example.com');
+  assert.equal(saved.order.payment.method,'bank_transfer');assert.equal(saved.order.payment.status,'unpaid');assert.equal(saved.order.pricing.total,300);
+  const newPayload={...payload,requestId:'00000000-0000-4000-8000-000000000051',lines:[{sku:'SKU-1',quantity:1},{sku:'SKU-1',quantity:1}]};assert.equal((await post(newPayload)).status,400);
+  const login=async id=>{const result=await fetch(base+'/api/auth/login',{method:'POST',headers:{Origin:base,'Content-Type':'application/json'},body:JSON.stringify({email:id+'@example.com',password:'correct-password'})});assert.equal(result.status,200);return result.headers.get('set-cookie').split(';')[0];};
+  const first=await login('u1'),other=await login('u2');
+  const accountPayload={...payload,requestId:'00000000-0000-4000-8000-000000000052',customerId:'u2'};
+  assert.equal((await post(accountPayload,base,first)).status,201);
+  const read=cookie=>fetch(base+'/api/account/orders',{headers:cookie?{Cookie:cookie}:{}});
+  assert.equal((await read()).status,401);
+  const own=await(await read(first)).json();assert.equal(own.orders.length,1);assert.equal(own.orders[0].id,accountPayload.requestId);assert.equal(own.orders[0].lines[0].productUrl,'/products/test-door?variant=v1');assert.equal(own.orders[0].notifications,undefined);
+  assert.deepEqual((await(await read(other)).json()).orders,[]);
+  assert.equal((await post(accountPayload,base,other)).status,409,'another account cannot replay an owned order');
+  const owned=JSON.parse(await fs.readFile(path.join(orders,accountPayload.requestId+'.json'),'utf8'));assert.equal(owned.order.customerId,'u1');
+});

@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import http from 'node:http';
+import {once} from 'node:events';
+import {createCustomerAuth} from '../integration/customer-auth.mjs';
+test('cart snapshots use authenticated ownership and reject foreign origins and invalid quantities',async t=>{
+ let auth,saved;
+ const user={id:'buyer-1',email:'buyer@test.ua'},token='h.'+Buffer.from(JSON.stringify({exp:Math.floor(Date.now()/1000)+3600})).toString('base64url')+'.x';
+ const server=http.createServer((req,res)=>auth.handle(req,res,new URL(req.url,'http://localhost')));server.listen(0,'127.0.0.1');await once(server,'listening');t.after(()=>server.close());const base='http://127.0.0.1:'+server.address().port;
+ auth=createCustomerAuth({saleorUrl:'https://test/graphql',channel:'test',publicUrl:base,json:(r,s,d)=>{r.writeHead(s,{'Content-Type':'application/json'});r.end(JSON.stringify(d));},readBody:async req=>{let raw='';for await(const c of req)raw+=c;return JSON.parse(raw);},fetchImpl:async(_,opts)=>{const {query,variables}=JSON.parse(opts.body);return {ok:true,json:async()=>({data:query.includes('CustomerLogin')?{tokenCreate:{token,user,errors:[]}}:query.includes('CustomerSelectionsSave')?(saved=variables,{updateMetadata:{errors:[]}}):{me:user}})};}});
+ const login=await fetch(base+'/api/auth/login',{method:'POST',headers:{Origin:base,'Content-Type':'application/json'},body:JSON.stringify({email:user.email,password:'testpassword'})});const cookie=login.headers.get('set-cookie').split(';')[0];
+ const send=(body,origin=base,session=cookie)=>fetch(base+'/api/auth/cart',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json',Cookie:session},body:JSON.stringify(body)});
+ assert.equal((await send({owner:user.id,lines:[]},base,'')).status,401);
+ assert.equal((await send({owner:'another',lines:[]})).status,409);
+ assert.equal((await send({owner:user.id,lines:[]},'https://evil.test')).status,403);
+ assert.equal((await send({owner:user.id,lines:[{id:'a',quantity:0}]})).status,400);
+ assert.equal((await send({owner:user.id,lines:[{id:'a',quantity:2,price:1}]})).status,200);
+ assert.equal(saved.id,user.id);assert.deepEqual(JSON.parse(saved.input[0].value).lines,[{id:'a',quantity:2}]);
+ assert.equal((await send({owner:user.id,lines:[],base:[{id:'a',quantity:2}]})).status,200);assert.deepEqual(JSON.parse(saved.input[0].value).lines,[]);
+});

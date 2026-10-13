@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Перевірити JavaScript",
+      "type": "process",
+      "command": "${workspaceFolder}/.runtime/node/node.exe",
+      "args": [
+        "--check",
+        "server.mjs"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

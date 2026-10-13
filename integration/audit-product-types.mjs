@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';
+const response=await fetch('http://127.0.0.1:8790/api/catalog');
+if(!response.ok)throw new Error(`Catalog HTTP ${response.status}`);
+const {products}=await response.json();
+const type=p=>p.specifications.find(s=>s.key==='product_type')?.value?.trim()||'';
+const missing=products.filter(p=>!type(p));
+const report={checkedAt:new Date().toISOString(),totalSkus:products.length,missingSkus:missing.length,missingModels:new Set(missing.map(p=>p.productId)).size,types:products.reduce((counts,p)=>{const key=type(p)||'Без типу';counts[key]=(counts[key]||0)+1;return counts;},{}),items:missing.map(({sku,name,variantName,productId,slug,category,specifications})=>({sku,name,variantName,productId,slug,category,specifications}))};
+await fs.writeFile(new URL('missing-product-types.local.json',import.meta.url),JSON.stringify(report,null,2));
+await fs.writeFile(new URL('missing-product-types.md',import.meta.url),`# Комплектації без типу виробу\n\nПеревірено: ${report.checkedAt}\n\n${report.missingSkus} із ${report.totalSkus} комплектацій; ${report.missingModels} моделей.\n\n| Артикул | Назва в 1С |\n|---|---|\n${missing.map(p=>`| ${p.sku} | ${p.variantName.replace(/\|/g,'/')} |`).join('\n')}\n`);
+console.log(JSON.stringify({totalSkus:report.totalSkus,missingSkus:report.missingSkus,missingModels:report.missingModels,types:report.types,samples:report.items.slice(0,5).map(p=>({sku:p.sku,name:p.variantName}))},null,2));

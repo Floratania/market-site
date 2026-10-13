@@ -1,0 +1,6 @@
+.site-footer .store-policy-links{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:12px 28px;grid-column:1/-1;width:100%;margin:0;padding:20px 0 24px;}
+.site-footer .store-policy-links a{display:inline-flex;align-items:center;flex:0 0 auto;width:auto;margin:0;padding:8px 0;line-height:1.5;text-underline-offset:4px;}
+.site-footer .store-policy-links a:focus-visible{outline:2px solid #ff0000;outline-offset:5px;}
+@media(max-width:600px){.site-footer .store-policy-links{display:grid;grid-template-columns:1fr;gap:4px;padding:16px 0 20px;}.site-footer .store-policy-links a{min-height:44px;}}
+
+.product-price del{font-size:.8em;color:var(--muted);margin-right:8px}.promotion-badge{display:block;color:#ff0000;font-weight:700;font-size:13px;margin-bottom:6px}

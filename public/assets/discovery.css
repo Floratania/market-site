@@ -1,0 +1,25 @@
+.home-directions,.home-ready{padding:64px 5%;max-width:1600px;margin:auto;scroll-margin-top:30px}
+.home-directions .eyebrow,.home-ready .eyebrow{color:var(--red-text);font-size:11px;letter-spacing:.15em;margin:0 0 12px}
+.home-discovery-head{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:28px}
+.home-discovery-head .home-section-title{margin:0}.home-discovery-head>a{white-space:nowrap;min-height:44px;display:flex;align-items:center;font-size:13px;color:var(--red-text);font-weight:600}
+.home-discovery-head .home-section-copy{font-size:15px;margin:16px 0 0;max-width:560px}
+.home-directions-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.home-direction{display:flex;flex-direction:column;padding:22px;border:1px solid var(--line);border-radius:12px;background:var(--surface);min-width:0;transition:border-color .18s,background .18s}
+.home-direction:hover{border-color:var(--red-text);background:var(--soft)}.home-direction-top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:11px}
+.home-direction-top .ui-icon{width:30px;height:30px}.home-direction h3{font-size:20px;margin:20px 0 8px;line-height:1.3}
+.home-direction p{font-size:13px;color:var(--muted);line-height:1.7;margin:0 0 22px}
+.home-direction-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.home-direction-bottom>span:last-child{color:var(--red-text);font-size:22px}
+.home-ready{border-top:1px solid var(--line)}.home-ready-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.home-ready-note{font-size:12px;color:var(--muted);line-height:1.7;margin:0 0 24px}
+.home-ready .product-image{box-sizing:border-box;padding:28px;height:300px;aspect-ratio:auto}.home-ready .product-image>img{display:block;width:100%;height:100%;min-width:0;min-height:0;object-fit:contain}.home-ready-delivery{display:flex;align-items:center;gap:10px;margin:0 0 22px;font-size:14px;font-weight:600;color:var(--ink)}.home-ready-delivery svg{width:24px;height:24px;flex-shrink:0;fill:none;stroke:var(--red-text);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.home-ready-help{display:flex;justify-content:space-between;gap:24px;align-items:center;margin-top:24px;padding:24px 28px;background:var(--soft);border:1px solid var(--line);border-radius:12px}
+.home-ready-help strong{font-size:18px}.home-ready-help p{font-size:13px;color:var(--muted);line-height:1.7;margin:7px 0 0}.home-ready-help>div:last-child{display:flex;flex-wrap:wrap;gap:12px 24px}.home-ready-help a{display:flex;align-items:center;min-height:44px;font-size:13px;color:var(--red-text);font-weight:600}
+.home-directions a:focus-visible,.home-ready a:focus-visible{outline:2px solid var(--red-text);outline-offset:4px}
+@media(max-width:1000px){.home-ready-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.home-ready-help{align-items:flex-start;flex-direction:column}}
+@media(max-width:760px){.home-directions,.home-ready{padding:40px 22px}.home-discovery-head{align-items:flex-start;flex-direction:column;gap:12px}.home-directions-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.home-direction{padding:16px}.home-direction h3{font-size:16px}.home-direction p{font-size:12px}.home-direction-top .ui-icon{width:24px;height:24px}.home-ready-help{padding:20px}.home-ready-grid{gap:14px}}
+@media(max-width:520px){.home-ready-grid{grid-template-columns:1fr}.home-direction p{display:none}.home-direction h3{margin-bottom:20px}.home-direction-bottom{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.home-direction{transition:none}}
+.home-direction-photo{display:flex;align-items:center;justify-content:center;width:100%;height:220px;background:#f4f4f3;border-radius:10px;overflow:hidden;margin-bottom:20px}
+.home-direction-photo img{width:100%;height:100%;object-fit:contain;padding:14px;transition:transform .3s ease}.home-direction:hover .home-direction-photo img{transform:scale(1.08)}
+:root[data-theme=dark] .home-direction-photo{background:#242729}
+@media(max-width:760px){.home-direction-photo{height:180px}}
+@media(prefers-reduced-motion:reduce){.home-direction-photo img{transition:none}.home-direction:hover .home-direction-photo img{transform:none}}

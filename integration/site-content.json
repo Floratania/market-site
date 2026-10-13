@@ -1,0 +1,31 @@
+{
+  "socials": [
+    {"label":"Facebook","url":"https://www.facebook.com/vsmarketua"},
+    {"label":"Instagram","url":"https://www.instagram.com/VSMARKET.UA"},
+    {"label":"TikTok","url":"https://www.tiktok.com/@vsmarket.ua"}
+  ],
+  "locations": [
+    {
+      "id": "mamaivtsi",
+      "name": "Мамаївці",
+      "address": "вул. Шевченка, 2-В, Мамаївці, Чернівецька область",
+      "phone": "+380953979777",
+      "latitude": 48.3452003,
+      "longitude": 25.8614261,
+      "placeId": "ChIJsd5FZgAHNEcRTjdi3uJYwYM",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=VS%20Market&query_place_id=ChIJsd5FZgAHNEcRTjdi3uJYwYM",
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2651.7973540778!2d25.861426100000003!3d48.3452003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473407006645deb1%3A0x83c158e2de62374e!2sVS%20Market!5e0!3m2!1suk!2sua!4v1791465534934!5m2!1suk!2sua"
+    },
+    {
+      "id": "buda",
+      "name": "Буда",
+      "address": "вул. Київська, 13, Буда, Чернівецька область",
+      "phone": "+380994979777",
+      "latitude": 48.299156,
+      "longitude": 26.0171438,
+      "placeId": "ChIJFSLjjjUJNEcRWo3NIkxYgCI",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=VS%20Market&query_place_id=ChIJFSLjjjUJNEcRWo3NIkxYgCI",
+      "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2654.192137628638!2d26.0171438!3d48.299155999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473409358ee32215%3A0x2280584c22cd8d5a!2sVS%20Market!5e0!3m2!1suk!2sua!4v1791465585742!5m2!1suk!2sua"
+    }
+  ]
+}

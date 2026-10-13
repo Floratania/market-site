@@ -1,0 +1,245 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import vm from 'node:vm';
+const app=await fs.readFile(new URL('../public/app.js',import.meta.url),'utf8');
+const demoRows=JSON.parse(await fs.readFile(new URL('../public/catalog-demo.json',import.meta.url),'utf8'));
+async function page(path, catalog, initialSaved=[]) {
+ const elements=new Map(); const changes={}; const saved=new Map(initialSaved);
+ const element=key=>{
+  if(!elements.has(key))elements.set(key,{value:'',textContent:'',innerHTML:'',hidden:true,dataset:{},style:{},listeners:{},open:false,showModal(){this.open=true},close(){this.open=false;this.listeners.close?.()},classList:{add(){},remove(){},toggle(){return true}},addEventListener(name,fn){this.listeners[name]=fn},setAttribute(){},focus(){},scrollIntoView(){},querySelector(){return element('submit')},querySelectorAll(){return []}});
+  return elements.get(key);
+ };
+ const url=new URL(path,'http://localhost');
+ const location={href:url.href,search:url.search,assign(value){this.assigned=value},replace(value){this.replaced=value}};
+ const context=vm.createContext({document:{title:'',querySelector:element,querySelectorAll:()=>[],addEventListener(name,fn){changes[name]=fn},documentElement:{dataset:{theme:'dark'}},body:{style:{}}},location,history:{replaceState(_state,_title,value){location.href=new URL(value,location.href).href}},localStorage:{getItem:key=>saved.get(key)||null,setItem:(key,value)=>saved.set(key,value)},URL,URLSearchParams,Intl,Date,Map,Set,matchMedia:()=>({matches:false}),fetch:async url=>({ok:true,json:async()=>url==='/catalog-demo.json' ? demoRows : catalog})});
+ vm.runInContext(app,context); await vm.runInContext('catalogReady',context);
+ return {element,context,location,changes,saved};
+}
+test('every demo item has a direct page and related items link to their own pages',async()=>{
+ for(const row of demoRows){
+  const result=await page(`/products/${row[0]}?demo=1`);
+  assert.equal(result.element('#home-page').hidden,true);
+  assert.equal(result.element('#product-page').hidden,false);
+  assert.match(result.element('#product-page').innerHTML,new RegExp(row[1]));
+  assert.equal(vm.runInContext('requestedProduct().id',result.context),row[0]);
+  assert.equal(result.context.document.title,`${row[1]} — VS Market`);
+  assert.match(result.element('#product-page').innerHTML,/Демонстраційний товар/);
+ }
+ const result=await page('/products/demo-window-1?demo=1');
+ assert.match(result.element('#product-page').innerHTML,/href="\/products\/demo-mesh-1\?demo=1"/);
+ assert.match(result.element('#product-page').innerHTML,/Дорожчі альтернативи/);
+ vm.runInContext("addProduct('demo-window-1')",result.context);
+ assert.equal(result.element('#cart-count').textContent,1);
+ assert.match(result.saved.get('vs-market-cart-v1'),/demo-window-1/);
+ result.changes.change({target:{id:'product-pickup-location',value:'magala'}});
+ assert.match(result.element('#product-stock-status').textContent,/Магала.*ще не підключені/);
+ const missing=await page('/products/missing?demo=1');
+ assert.match(missing.element('#product-page').innerHTML,/Товар не знайдено/);
+});
+test('shared product page retains chosen variant and shows stock for that variant only',async()=>{
+ const variants=['v1','v2'].map((id,index)=>({id,productId:'p1',slug:'door',name:'Двері',variantName:index ? 'Праві':'Ліві',sku:`SKU-${index}`,category:'Двері',price:null,currency:'UAH',specifications:[],crossSellSkus:[],upsellSkus:[]}));
+ const catalog={products:variants,stockVerified:true,stock:[{sku:'SKU-1',location:'mamaivtsi',quantity:4},{sku:'SKU-0',location:'mamaivtsi',quantity:20}]};
+ const result=await page('/products/door?variant=v2',catalog);
+ assert.equal(vm.runInContext('requestedProduct().id',result.context),'v2');
+ assert.match(result.element('#product-page').innerHTML,/Праві/);
+ assert.match(result.element('#product-page').innerHTML,/product-variant-choice/);
+ result.changes.change({target:{id:'product-pickup-location',value:'mamaivtsi'}});
+ assert.match(result.element('#product-stock-status').textContent,/доступно 4/);
+ assert.doesNotMatch(result.element('#product-stock-status').textContent,/20/);
+ result.changes.change({target:{id:'product-variant-choice',value:'v1'}});
+ assert.equal(vm.runInContext('state.activeProduct.id',result.context),'v1');
+ assert.match(result.location.href,/variant=v1/);
+ const missing=await page('/products/door?variant=missing',catalog);
+ assert.match(missing.element('#product-page').innerHTML,/Товар не знайдено/);
+});
+test('a model has a catalog card per colour and selecting handing keeps exact SKU price, photo and warehouse stock',async()=>{
+ const variants=[['v1','900','2050','Білий','L',1000],['v2','900','2050','Білий','R',2000],['v3','950','1950','Горіх','R',3000]].map(([id,width,height,color,direction,price],index)=>({id,productId:'p1',slug:'ts1',name:'Двері TS1',variantName:`${width} × ${height} ${color} ${direction}`,sku:`SKU-${index}`,price,currency:'UAH',category:'Двері',image:`http://localhost/${id}.jpg`,media:[{id:`photo-${id}`,url:`http://localhost/${id}.jpg`,alt:id}],specifications:[{key:'width',label:'Ширина',value:width,unit:'мм',filterable:true},{key:'height',label:'Висота',value:height,unit:'мм',filterable:true},{key:'color',label:'Колір',value:color,filterable:true},{key:'opening_direction',label:'Відкривання',value:direction,filterable:true}],crossSellSkus:[],upsellSkus:[]}));
+ const result=await page('/products/ts1?variant=v1',{products:variants,stockVerified:true,stock:[{sku:'SKU-0',location:'magala',quantity:10},{sku:'SKU-1',location:'magala',quantity:2},{sku:'SKU-2',location:'magala',quantity:3}]});
+ assert.match(result.element('#result-count').textContent,/2 пропозицій · 3 комплектацій/);
+ assert.equal((result.element('#product-grid').innerHTML.match(/<article/g)||[]).length,2);
+ assert.match(result.element('#product-grid').innerHTML,/Обрати варіант/);
+ assert.match(result.element('#product-page').innerHTML,/data-variant-axis="width"/);
+ assert.match(result.element('#product-page').innerHTML,/data-variant-axis="height"/);
+ assert.doesNotMatch(result.element('#product-page').innerHTML,/data-variant-axis="size"/);
+ result.element('#product-pickup-location').value='magala';
+ result.changes.change({target:{dataset:{variantAxis:'opening_direction'},value:'Праве (R)'}});
+ assert.equal(vm.runInContext('state.activeProduct.id',result.context),'v2');
+ assert.equal(vm.runInContext('state.activeProduct.price',result.context),2000);
+ assert.match(result.element('#product-page').innerHTML,/v2.jpg/);
+ assert.match(result.element('#product-stock-status').textContent,/доступно 2/);
+ vm.runInContext("addProduct(state.activeProduct.id)",result.context);
+ assert.match(result.saved.get('vs-market-cart-v1'),/v2/);
+ result.changes.change({target:{dataset:{variantAxis:'width'},value:'950 мм'}});
+ assert.equal(vm.runInContext('state.activeProduct.id',result.context),'v3');
+ assert.equal(vm.runInContext('state.activeProduct.price',result.context),3000);
+});
+test('width and height are independent choices, duplicate colours collapse, and only valid combinations resolve to a SKU',async()=>{
+ const variants=[['a','900','2050','Білий','R',1000],['b','900','1950','Білий','R',2000],['c','900','1950',' білий  ','R',2500],['d','950','1950','Горіх','L',3000]].map(([id,width,height,color,direction,price])=>({id,productId:'p2',slug:'model2',name:'Двері',variantName:`${width} × ${height} ${color} ${direction}`,sku:`SKU-${id}`,category:'Двері',price,currency:'UAH',specifications:[{key:'width',value:width,unit:'мм'},{key:'height',value:height,unit:'мм'},{key:'color',value:color},{key:'opening_direction',value:direction}],crossSellSkus:[],upsellSkus:[]}));
+ const result=await page('/products/model2?variant=a',{products:variants,stock:[],stockVerified:false});
+ assert.match(result.element('#product-page').innerHTML,/Ширина<select/);assert.match(result.element('#product-page').innerHTML,/Висота<select/);
+ assert.doesNotMatch(result.element('#product-page').innerHTML,/id="product-variant-choice"/,'an unambiguous combination needs no whole-model SKU list');
+ result.changes.change({target:{dataset:{variantAxis:'height'},value:'1950 мм'}});
+ assert.equal(vm.runInContext('state.activeProduct.id',result.context),'b');assert.equal(vm.runInContext("variantDimension(state.activeProduct,'width')",result.context),'900 мм');
+ const html=result.element('#product-page').innerHTML;
+ const colourSelect=/data-variant-axis="color"[^>]*>(.*?)<\/select>/.exec(html)[1];assert.equal((colourSelect.match(/<option/g)||[]).length,2,'both model colours remain available and duplicate white labels collapse');
+ assert.match(html,/Додаткова комплектація/);const matchingSelect=/id="product-variant-choice"[^>]*>(.*?)<\/select>/.exec(html)[1];assert.equal((matchingSelect.match(/<option/g)||[]).length,2);
+ result.changes.change({target:{dataset:{variantAxis:'height'},value:'9999 мм'}});assert.equal(vm.runInContext('state.activeProduct.id',result.context),'b');
+ result.changes.change({target:{dataset:{variantAxis:'width'},value:'950 мм'}});assert.equal(vm.runInContext('state.activeProduct.id',result.context),'d');
+ assert.match(result.element('#variant-selection-note').textContent,/сторона відкривання.*Ліве.*колір.*Горіх/);
+});
+test('both SKU photos render and the photo dialog supports navigation, full-image fit, zoom and Escape',async()=>{
+ const product={id:'v1',productId:'p1',slug:'door',name:'Двері',variantName:'Праві',sku:'SKU-R',category:'Двері',price:1000,currency:'UAH',image:'http://localhost/front.jpg',media:[{id:'front',url:'http://localhost/front.jpg',alt:'Спереду'},{id:'back',url:'http://localhost/back.jpg',alt:'Ззаду'}],specifications:[],crossSellSkus:[],upsellSkus:[]};
+ const result=await page('/products/door?variant=v1',{products:[product],stock:[],stockVerified:false});
+ const html=result.element('#product-page').innerHTML;
+ assert.match(html,/data-photo="front"/);assert.match(html,/data-photo="back"/);assert.match(html,/data-enlarge="v1"/);
+ assert.match(result.element('#product-grid').innerHTML,/card-photo-enlarge/);
+ result.element('#photo-viewer-scroll').clientWidth=800;result.element('#photo-viewer-scroll').clientHeight=600;
+ result.element('#photo-viewer-image').naturalWidth=400;result.element('#photo-viewer-image').naturalHeight=1000;
+ vm.runInContext('openPhotos(state.activeProduct)',result.context);
+ assert.equal(result.element('#photo-viewer').open,true);assert.equal(result.element('#photo-viewer-count').textContent,'1 / 2');
+ assert.equal(result.element('#photo-viewer-image').style.width,'240px');assert.equal(result.element('#photo-viewer-image').style.height,'600px');
+ result.element('#photo-next').listeners.click();assert.equal(result.element('#photo-viewer-image').src,'http://localhost/back.jpg');assert.equal(result.element('#photo-viewer-count').textContent,'2 / 2');
+ result.element('#photo-zoom-in').listeners.click();assert.equal(result.element('#photo-zoom-label').textContent,'150%');assert.equal(result.element('#photo-viewer-image').style.width,'360px');
+ result.element('#photo-zoom-reset').listeners.click();assert.equal(result.element('#photo-viewer-image').style.width,'240px');
+ result.changes.keydown({key:'ArrowLeft',preventDefault(){}});assert.equal(result.element('#photo-viewer-image').src,'http://localhost/front.jpg');
+ result.changes.keydown({key:'Escape',preventDefault(){}});assert.equal(result.element('#photo-viewer').open,false);assert.equal(result.context.document.body.style.overflow,'');
+});
+test('favorites keep the selected SKU across reloads and demo lists stay separate',async()=>{
+ const result=await page('/products/demo-window-1?demo=1');
+ vm.runInContext("toggleSelection('favorites','demo-window-1')",result.context);
+ assert.equal(result.element('#favorites-count').textContent,1);
+ assert.match(result.element('#favorites-content').innerHTML,/demo-window-1\?demo=1/);
+ const reloaded=await page('/catalog?demo=1&list=favorites',undefined,[...result.saved]);
+ assert.equal(reloaded.element('#favorites-count').textContent,1);
+ assert.equal(reloaded.element('#favorites-dialog').open,true);
+ vm.runInContext("toggleSelection('favorites','demo-window-1')",reloaded.context);
+ assert.equal(reloaded.element('#favorites-count').textContent,0);
+ assert.match(reloaded.element('#favorites-content').innerHTML,/Поки немає/);
+ const live=await page('/',{products:[],stock:[]},[...result.saved]);
+ assert.equal(live.element('#favorites-count').textContent,0);
+});
+test('comparison limits to four exact SKUs, preserves units, highlights differences and escapes specifications',async()=>{
+ const products=Array.from({length:5},(_,i)=>({id:'v'+i,productId:'model',slug:'door',name:'Двері',variantName:'Комплектація '+i,sku:'SKU-'+i,price:1000+i*100,currency:'UAH',category:'Двері',specifications:[{key:'width',label:'Ширина',value:i?'950':'900',unit:i===2?'см':'мм'},{key:'height',label:'Висота',value:'2050',unit:'мм'},{key:'color',label:'Колір',value:i===3?'<script>':'Білий'}],crossSellSkus:[],upsellSkus:[]}));
+ const catalog={products,stock:[]};const result=await page('/products/door?variant=v0',catalog);
+ for(let i=0;i<5;i++)vm.runInContext(`toggleSelection('comparison','v${i}')`,result.context);
+ assert.equal(result.element('#comparison-count').textContent,4);
+ assert.match(result.element('#selection-status').textContent,/до 4 комплектацій/);
+ const html=result.element('#comparison-content').innerHTML;
+ for(let i=0;i<4;i++)assert.match(html,new RegExp('SKU-'+i));
+ assert.doesNotMatch(html,/SKU-4/);assert.match(html,/950 см/);assert.match(html,/950 мм/);
+ assert.match(html,/comparison-different/);assert.match(html,/&lt;script&gt;/);assert.doesNotMatch(html,/<script>/);
+ assert.match(html,/Фото не знайдено в базі даних/);
+ result.element('#comparison-differences').checked=true;result.element('#comparison-differences').listeners.change();
+ assert.doesNotMatch(result.element('#comparison-content').innerHTML,/>Висота</);
+ assert.match(result.element('#comparison-content').innerHTML,/>Ширина</);
+ const reloaded=await page('/catalog?list=comparison',catalog,[...result.saved]);
+ assert.equal(reloaded.element('#comparison-count').textContent,4);assert.equal(reloaded.element('#comparison-dialog').open,true);
+ vm.runInContext("toggleSelection('comparison','v1');toggleSelection('comparison','v4')",reloaded.context);
+ assert.equal(reloaded.element('#comparison-count').textContent,4);
+ assert.match(reloaded.element('#comparison-content').innerHTML,/SKU-4/);assert.doesNotMatch(reloaded.element('#comparison-content').innerHTML,/SKU-1/);
+ vm.runInContext("addProduct('v4')",reloaded.context);assert.equal(reloaded.element('#comparison-dialog').open,false);assert.equal(reloaded.element('#cart-drawer').hidden,false);
+});
+test('unavailable saved SKUs can be removed and corrupt browser lists are ignored',async()=>{
+ const saved=[['vs-market-selections-v1',JSON.stringify({favorites:['gone','gone',null],comparison:['gone']})]];
+ const result=await page('/',{products:[],stock:[]},saved);
+ assert.equal(result.element('#favorites-count').textContent,1);assert.match(result.element('#favorites-content').innerHTML,/більше не доступний/);
+ vm.runInContext("toggleSelection('favorites','gone');toggleSelection('comparison','gone')",result.context);
+ assert.equal(result.element('#favorites-count').textContent,0);assert.equal(result.element('#comparison-count').textContent,0);
+ const corrupt=await page('/',{products:[],stock:[]},[['vs-market-selections-v1','invalid-json']]);
+ assert.equal(corrupt.element('#favorites-count').textContent,0);
+});
+test('empty image fields show the missing-photo message rather than loading the page as an image',async()=>{
+ const product={id:'v',slug:'no-photo',name:'Двері без фото',sku:'NO-PHOTO',category:'Двері',image:'',media:[],specifications:[],crossSellSkus:[],upsellSkus:[]};
+ const result=await page('/products/no-photo',{products:[product],stock:[]});
+ for(const value of ['undefined','null',"''","'   '"])assert.equal(vm.runInContext(`imageUrl(${value})`,result.context),'');
+ assert.match(result.element('#product-grid').innerHTML,/Фото не знайдено в базі даних/);
+ assert.match(result.element('#product-page').innerHTML,/Фото не знайдено в базі даних/);
+ assert.doesNotMatch(result.element('#product-grid').innerHTML,/card-photo-enlarge/);
+ assert.doesNotMatch(result.element('#product-page').innerHTML,/data-enlarge/);
+});
+test('dimension searches show separate colours with exact matching prices, independent of cheaper model sizes',async()=>{
+ const products=[['white-cheap','800','1900','Білий','L',500],['white-r','900','2050','Білий','R',1100],['white-l','900','2050',' білий ','L',1100],['oak-r','900','2050','Горіх','R',2200],['oak-l','900','2050','Горіх','L',2300]].map(([id,width,height,color,opening,price])=>({id,productId:'model',slug:'ts1',name:'Двері TS1',variantName:`${width}×${height} ${color} ${opening}`,sku:'SKU-'+id,price,currency:'UAH',category:'Двері',specifications:[{key:'width',label:'Ширина',value:width,unit:'мм',filterable:true},{key:'height',label:'Висота',value:height,unit:'мм',filterable:true},{key:'color',label:'Колір',value:color,filterable:true},{key:'opening_direction',value:opening}],crossSellSkus:[],upsellSkus:[]}));
+ const result=await page('/',{products,stock:[]});
+ assert.equal(vm.runInContext('catalogCards().items.length',result.context),2);
+ assert.match(result.element('#product-grid').innerHTML,/500.*–.*1\s*100/u);
+ for(const search of ['900×2050','900*2050','900x2050','900 х 2050','900 2050','TS1 900×2050','ширина 900 висота 2050','90x205 см']){
+   result.element('#search').listeners.input({target:{value:search}});
+   assert.equal(vm.runInContext('catalogCards().matching.length',result.context),4,search);
+   assert.equal(vm.runInContext('catalogCards().items.length',result.context),2,search+' merges handing despite different prices');
+   const html=result.element('#product-grid').innerHTML;
+   assert.doesNotMatch(html,/від |SKU-white-cheap|800 мм/);assert.match(html,/білий/iu);assert.match(html,/Горіх/);
+   const prices=JSON.parse(vm.runInContext('JSON.stringify(catalogCards().items.map(p=>p.price).sort((a,b)=>a-b))',result.context));assert.deepEqual(prices,[1100,2200]);assert.match(html,/2\s*200.*–.*2\s*300/u);
+ }
+ result.element('#search').listeners.input({target:{value:'TS1 900×2050 білий'}});
+ assert.equal(vm.runInContext('catalogCards().items.length',result.context),1);assert.equal(vm.runInContext('catalogCards().matching.length',result.context),2);
+ const chosen=vm.runInContext('catalogCards().items[0].id',result.context);
+ vm.runInContext(`renderProduct(byId(${JSON.stringify(chosen)}))`,result.context);
+ const colourSelect=/data-variant-axis="color"[^>]*>(.*?)<\/select>/.exec(result.element('#product-page').innerHTML)[1];assert.match(colourSelect,/Горіх/);assert.match(colourSelect,/білий/iu);
+ vm.runInContext("state.search='';state.facets['spec:width']=['900 мм'];state.facets['spec:height']=['2050 мм'];renderCatalog()",result.context);
+ assert.doesNotMatch(result.element('#product-grid').innerHTML,/від /);assert.equal(vm.runInContext('catalogCards().matching.length',result.context),4);
+});
+test('model colour selection exposes unavailable sizes and chooses a real SKU while reporting changed dimensions',async()=>{
+ const products=[['white','900','2050','Білий','R'],['oak','950','1950','Горіх','L']].map(([id,width,height,color,direction])=>({id,productId:'model',slug:'model',name:'Двері',sku:id,category:'Двері',price:1000,currency:'UAH',specifications:[{key:'width',value:width,unit:'мм'},{key:'height',value:height,unit:'мм'},{key:'color',value:color},{key:'opening_direction',value:direction}],crossSellSkus:[],upsellSkus:[]}));
+ const result=await page('/products/model?variant=white',{products,stock:[]});
+ const select=/data-variant-axis="color"[^>]*>(.*?)<\/select>/.exec(result.element('#product-page').innerHTML)[1];assert.match(select,/Горіх/);
+ result.changes.change({target:{dataset:{variantAxis:'color'},value:'горіх'}});
+ assert.equal(vm.runInContext('state.activeProduct.id',result.context),'oak');
+ assert.match(result.element('#variant-selection-note').textContent,/ширина.*950 мм.*висота.*1950 мм.*сторона відкривання.*Ліве/);
+ assert.match(result.location.href,/variant=oak/);
+});
+test('catalog photo arrows cycle only that SKU photos and enlargement opens the displayed photo',async()=>{
+ const product={id:'v1',productId:'p1',slug:'door',name:'Двері',sku:'SKU',price:1000,category:'Двері',image:'http://localhost/front.jpg',media:[{id:'front',url:'http://localhost/front.jpg',alt:'Перед'},{id:'back',url:'http://localhost/back.jpg',alt:'Зад'}],specifications:[],crossSellSkus:[],upsellSkus:[]};
+ const result=await page('/products/door?variant=v1',{products:[product],stock:[]});
+ assert.match(result.element('#product-grid').innerHTML,/data-card-photo-step="-1"/);assert.match(result.element('#product-grid').innerHTML,/data-card-photo-step="1"/);
+ assert.match(result.element('#product-page').innerHTML,/data-product-photo-step="1"/);
+ result.context.cardMedia={dataset:{galleryProduct:'v1'},querySelector:selector=>result.element('card '+selector)};
+ vm.runInContext('changeCardPhoto(cardMedia,1)',result.context);
+ assert.equal(result.element('card .product-image > img').src,'http://localhost/back.jpg');assert.equal(result.element('card .gallery-photo-count').textContent,'2 / 2');
+ const enlarge=result.element('card .card-photo-enlarge');assert.equal(enlarge.dataset.photoIndex,'1');
+ result.changes.click({target:{closest:selector=>selector==='[data-enlarge]'?{dataset:{enlarge:'v1',photoIndex:enlarge.dataset.photoIndex}}:null}});
+ assert.equal(result.element('#photo-viewer-image').src,'http://localhost/back.jpg');
+ vm.runInContext('changeCardPhoto(cardMedia,1)',result.context);assert.equal(result.element('card .product-image > img').src,'http://localhost/front.jpg');
+ vm.runInContext('changeCardPhoto(cardMedia,-1)',result.context);assert.equal(result.element('card .product-image > img').src,'http://localhost/back.jpg');
+ vm.runInContext('selectProductPhoto(1)',result.context);assert.equal(result.element('.product-page-art img').src,'http://localhost/back.jpg');assert.equal(result.element('#product-photo-count').textContent,'2 / 2');
+ vm.runInContext('selectProductPhoto(2)',result.context);assert.equal(result.element('.product-page-art img').src,'http://localhost/front.jpg');
+ const single=await page('/',{products:[{...product,media:[],image:''}],stock:[]});assert.doesNotMatch(single.element('#product-grid').innerHTML,/data-card-photo-step/);
+});
+test('home and catalog are separate routes and legacy catalog links redirect without losing filters',async()=>{
+ const home=await page('/?demo=1');assert.equal(home.element('#home-page').hidden,false);assert.equal(home.element('#catalog').hidden,true);
+ const catalog=await page('/catalog?demo=1&category=Двері&q=950×2000');assert.equal(catalog.element('#home-page').hidden,true);assert.equal(catalog.element('#catalog').hidden,false);assert.match(catalog.element('#product-grid').innerHTML,/Додати в кошик/);assert.doesNotMatch(catalog.element('#product-grid').innerHTML,/>До заявки</);
+ assert.equal(vm.runInContext('catalogCards().matching.length',catalog.context),2);
+ const legacy=await page('/?demo=1&category=Двері#catalog');assert.match(legacy.location.replaced,/^\/catalog\?demo=1&category=/);
+});
+test('custom designs persist in cart, merge matching sketches and expose validated designs to checkout without invented prices',async()=>{
+ const result=await page('/catalog',{products:[{id:'sku',sku:'SKU',name:'Готові двері',price:1200,currency:'UAH',specifications:[],crossSellSkus:[],upsellSkus:[]}],stock:[],stockVerified:false});
+ const design={kind:'window',width:1200,height:1400,color:'white',material:'pvc',opening:'tilt-turn',sections:2};
+ vm.runInContext(`addCustomProduct(${JSON.stringify(design)});addCustomProduct(${JSON.stringify(design)});setQuantity('sku',1)`,result.context);
+ assert.equal(result.element('#cart-count').textContent,3);assert.match(result.element('#cart-items').innerHTML,/1200 × 1400 мм/);assert.match(result.element('#cart-total').textContent,/1.*200.*за розрахунком/);
+ const customId=vm.runInContext('Object.keys(state.customCart)[0]',result.context);const reload=await page('/catalog',{products:[],stock:[]},[...result.saved]);
+ assert.equal(reload.element('#cart-count').textContent,2);assert.equal(vm.runInContext('cartLines()[0].product.price',reload.context),null);
+ assert.throws(()=>vm.runInContext(`addCustomProduct(${JSON.stringify({...design,width:-1})})`,result.context),/100 до 6000/);
+ vm.runInContext(`setQuantity(${JSON.stringify(customId)},1)`,result.context);assert.equal(result.element('#cart-count').textContent,2);
+ const customLine=vm.runInContext('VSMarketShop.cartLines().find(line=>line.product.customDesign)',result.context);
+ assert.deepEqual(JSON.parse(JSON.stringify(customLine.product.customDesign)),design);assert.equal(customLine.product.price,null);assert.equal(customLine.quantity,1);
+ vm.runInContext('VSMarketShop.clearCart()',result.context);assert.equal(result.element('#cart-count').textContent,0);
+});
+test('warehouse filter selects actual positive SKU stock before model grouping and prices, then carries pickup context',async()=>{
+ const products=[['cheap',500],['mama',2000],['magala',3000],['zero',1],['negative',2],['missing',3]].map(([id,price])=>({id,productId:'model',slug:'door',name:'Двері',variantName:id,sku:id,price,currency:'UAH',category:'Двері',availableTotal:999,specifications:[{key:'width',value:'900',unit:'мм',label:'Ширина'},{key:'height',value:'2050',unit:'мм',label:'Висота'},{key:'color',value:'Білий',label:'Колір'}],crossSellSkus:[],upsellSkus:[]}));
+ const catalog={products,stockVerified:false,stockSnapshotAt:'2026-10-08T11:30:00Z',stock:[{sku:'cheap',location:'magala',quantity:5},{sku:'mama',location:'mamaivtsi',quantity:2,reserved:99},{sku:'magala',location:'magala',quantity:3},{sku:'zero',location:'mamaivtsi',quantity:0},{sku:'negative',location:'mamaivtsi',quantity:-2}]};
+ const result=await page('/catalog',catalog);assert.match(result.element('#filter-groups').innerHTML,/Наявність на складі/);assert.match(result.element('#filter-groups').innerHTML,/08.10.26/);
+ result.element('#filter-groups').listeners.change({target:{id:'warehouse-filter',value:'mamaivtsi'}});
+ assert.equal(vm.runInContext('catalogCards().matching.length',result.context),1);assert.equal(vm.runInContext('catalogCards().items[0].price',result.context),2000);
+ assert.match(result.element('#product-grid').innerHTML,/warehouse=mamaivtsi/);assert.match(result.location.href,/warehouse=mamaivtsi/);assert.match(result.element('#result-count').textContent,/Мамаївці/);
+ vm.runInContext("renderProduct(byId('mama'))",result.context);assert.equal(result.element('#product-pickup-location').value,'mamaivtsi');assert.match(result.element('#product-stock-status').textContent,/доступно 2/);
+ vm.runInContext("browse('Двері')",result.context);assert.equal(vm.runInContext('state.stockLocation',result.context),'mamaivtsi');assert.equal(vm.runInContext('catalogCards().matching.length',result.context),1);
+ result.element('#filter-groups').listeners.change({target:{id:'warehouse-filter',value:'magala'}});assert.equal(vm.runInContext('catalogCards().matching.length',result.context),2);
+ result.element('#filter-groups').listeners.change({target:{id:'warehouse-filter',value:'any'}});assert.equal(vm.runInContext('catalogCards().matching.length',result.context),3);
+ result.element('#reset-filters').listeners.click();assert.equal(vm.runInContext('state.stockLocation',result.context),'');assert.equal(vm.runInContext('catalogCards().matching.length',result.context),6);assert.doesNotMatch(result.location.href,/warehouse=/);
+ const direct=await page('/catalog?warehouse=mamaivtsi&q=900×2050',catalog);assert.equal(vm.runInContext('catalogCards().matching.length',direct.context),1);
+});
+test('warehouse availability is not inferred from Saleor totals when warehouse data are unavailable',async()=>{
+ const result=await page('/catalog?warehouse=mamaivtsi',{products:[{id:'v',sku:'SKU',name:'Двері',price:1000,currency:'UAH',availableTotal:999,specifications:[]}],stock:[],stockVerified:false});
+ assert.equal(vm.runInContext('catalogCards().matching.length',result.context),0);assert.match(result.element('#product-grid').innerHTML,/Дані наявності ще недоступні/);assert.match(result.element('#filter-groups').innerHTML,/disabled/);
+ result.element('#filter-groups').listeners.change({target:{id:'warehouse-filter',value:''}});assert.equal(vm.runInContext('catalogCards().matching.length',result.context),1);
+});

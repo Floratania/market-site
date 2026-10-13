@@ -1,0 +1,18 @@
+import fs from 'node:fs/promises';
+import {enrichmentFor,propertyDefinitions} from './product-enrichment.mjs';
+import {csv} from './catalog-export-format.mjs';
+const source=JSON.parse(await fs.readFile(new URL('product-details-source.local.json',import.meta.url),'utf8'));
+const importReport=JSON.parse(await fs.readFile(new URL('saleor-import-result.local.json',import.meta.url),'utf8'));
+const input=JSON.parse(await fs.readFile(new URL(`exports/${importReport.source}/catalog.local.json`,import.meta.url),'utf8'));
+const catalogProducts=new Map(input.products.map(p=>[p.ProductRef,p]));
+source.products=source.products.map(product=>({...product,Name:product.Name||catalogProducts.get(product.ProductRef)?.Name,GroupName:catalogProducts.get(product.ProductRef)?.GroupName}));
+const report=enrichmentFor(source);
+const oldMap=JSON.parse(await fs.readFile(new URL('public-property-map.json',import.meta.url),'utf8'));
+const sourceProperties=new Map(source.properties.map(p=>[p.PropertyRef,p]));
+const publicMap=[...sourceProperties.values()].flatMap(p=>{const def=propertyDefinitions.find(d=>d.label===p.PropertyName);return def?[{ref:p.PropertyRef,name:p.PropertyName,publicKey:def.key,filterable:def.filterable,public:true}]:[];});
+await fs.writeFile(new URL('public-property-map.json',import.meta.url),JSON.stringify([...publicMap,...oldMap.filter(p=>p.public===false)],null,2));
+await fs.writeFile(new URL('product-enrichment.local.json',import.meta.url),JSON.stringify(report,null,2));
+const conflicts=report.issues.filter(i=>i.reason==='dimension-conflict').map(issue=>{const p=input.products.find(p=>p.ProductRef===issue.productRef);return {SKU:p?.Code?.trim()||'',Name:p?.Name||'',Dimension:issue.key,PropertyValue:issue.property,FieldValue:issue.field,Unit:'mm',ProductRef:issue.productRef};});
+await fs.writeFile(new URL('product-dimension-conflicts.csv',import.meta.url),csv(conflicts,['SKU','Name','Dimension','PropertyValue','FieldValue','Unit','ProductRef']));
+const coverage={};for(const p of report.products)for(const s of p.specs)coverage[s.label]=(coverage[s.label]||0)+1;
+console.log(JSON.stringify({products:report.products.length,coverage,issues:report.issues.length,issueSamples:report.issues.slice(0,8)},null,2));

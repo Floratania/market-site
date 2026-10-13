@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FF0000">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Мій кабінет — VS Market</title>
+  <link id="brand-favicon" rel="icon" type="image/png" href="/assets/brand-cart-dark.png">
+  <link rel="stylesheet" href="/showroom.css">
+  <link rel="stylesheet" href="/assets/fonts.css">
+  <link rel="stylesheet" href="/assets/shopping-lists.css?v=20261008-16">
+  <link rel="stylesheet" href="/account.css">
+  <link rel="stylesheet" href="/assets/brand-variants.css?v=20261008-16">
+  <link rel="stylesheet" href="/assets/locations.css?v=20261008-17">
+  <link rel="stylesheet" href="/assets/contacts.css?v=20261008-18">
+  <script type="module" src="/locations.js?v=20261009-30"></script>
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('vs-market-theme')||'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+  <script src="/customer-selections.js?v=20261008-16" defer></script>
+  <script src="/account-session.js?v=20261008-16" defer></script>
+  <script src="/account.js?v=20261012-commerce1" defer></script>
+  <link rel="stylesheet" href="/assets/page-utilities.css?v=20261008-21">
+  <script src="/page-utilities.js?v=20261009-22" defer></script>
+<link rel="stylesheet" href="/assets/footer-links.css?v=1"></head>
+<body class="account-body">
+  <a class="skip-link" href="#account-panel">Перейти до форми</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="VS Market — на головну"><span class="brand-logo-frame"><img class="brand-logo" src="/assets/icons/brand-logo-transparent.svg" alt="VS Market" width="730" height="110"></span><span class="brand-mobile-cart" aria-hidden="true"><img src="/assets/icons/brand-cart-transparent.svg?v=31" alt="" width="130" height="109"></span></a>
+    <nav aria-label="Головна навігація"><a data-catalog-link href="/catalog">Каталог</a><a href="/catalog?category=Вікна#catalog">Вікна</a><a href="/catalog?category=Двері#catalog">Двері</a><a href="/catalog?category=Фурнітура#catalog">Фурнітура</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Змінити тему"><img id="theme-icon" class="ui-icon" src="/assets/icons/moon.svg" alt=""></button>
+  <div class="shopping-tools" role="group" aria-label="Збережені товари"><a href="/catalog?list=favorites#catalog" aria-label="Улюблені товари" title="Улюблені товари"><svg class="selection-icon heart-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span class="saved-label">Улюблені</span> <span class="list-count" id="favorites-count">0</span></a><a href="/catalog?list=comparison#catalog" aria-label="Порівняння товарів" title="Порівняння товарів"><svg class="selection-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10m8 10V4m8 16V7M2 20h20"/></svg><span class="saved-label">Порівняння</span> <span class="list-count" id="comparison-count">0</span></a><a class="cart-trigger" href="/catalog?cart=1" aria-label="Відкрити кошик" title="Кошик"><svg class="selection-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3h2l3 12h11l2-9H6M8 15l-1 3h13"/><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg><span class="saved-label">Кошик</span><span class="list-count" id="cart-count">0</span></a></div>
+    <div class="account-actions"><a class="account-trigger" id="account-link" href="/account/login" aria-label="Увійти в кабінет покупця"><img class="ui-icon" src="/assets/icons/user.svg" alt=""><span id="account-label">Увійти</span></a><button class="account-trigger header-logout" id="header-logout" type="button" aria-label="Вийти з акаунта" title="Вийти з акаунта" hidden><svg class="selection-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 4H4v16h5M9 12h12m-4-4 4 4-4 4"/></svg><span>Вийти</span></button></div>
+  </header>
+  <main class="account-layout">
+    <aside class="account-story" aria-label="VS Market — вікна та двері">
+      <img class="account-story-photo" src="/assets/hero-house.png" alt="Сучасний будинок із панорамними вікнами та дверима">
+      <div class="account-story-copy"><p class="account-kicker">VS MARKET · ВІКНА ТА ДВЕРІ</p><h1>Ваш дім.<br>Ваш вибір.<br><span>Ваш простір.</span></h1><p>Усе для нового погляду<br>на вашу оселю.</p><a data-catalog-link href="/catalog">Повернутися до каталогу <img class="ui-icon" src="/assets/icons/arrow-right.svg" alt=""></a></div>
+    </aside>
+    <section class="account-panel" id="account-panel" aria-labelledby="account-heading">
+      <div class="account-card" id="account-content"><p class="eyebrow">ВАШ ПРОСТІР</p><h2 id="account-heading">Мій кабінет</h2><p role="status">Завантажуємо…</p></div>
+      <noscript>Для входу та реєстрації увімкніть JavaScript у браузері.</noscript>
+      <p class="account-help">Потрібна допомога з вибором?<br><a data-catalog-link href="/catalog">Оберіть товари й залиште заявку менеджеру →</a></p>
+    </section>
+  </main>
+  <footer class="site-footer"><section class="footer-contacts" id="contacts" aria-labelledby="contacts-title">
+    <div class="footer-contacts-intro"><p class="eyebrow">БУДЬМО НА ЗВ’ЯЗКУ</p><h2 id="contacts-title">Допоможемо з вибором.</h2><p>Дзвінок, email або соцмережі — оберіть, як вам зручно.</p><p class="footer-delivery-note">Відправляємо Новою поштою по Україні. Деталі доставки узгодимо під час підтвердження замовлення.</p></div>
+    <div class="footer-contact-details"><a class="footer-contact-link" href="tel:+380666709777"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 3 3 5-3 2c1 3 3 5 6 6l2-3 5 3c-1 5-4 6-8 4-5-2-9-6-11-11C0 5 3 2 8 3Z"/></svg><span><span class="footer-contact-label">Зателефонуйте нам</span><strong>+380 66 670 97 77</strong></span></a><a class="footer-contact-link" href="mailto:info@vstmarket.com.ua"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg><span><span class="footer-contact-label">Напишіть на email</span><strong>info@vstmarket.com.ua</strong></span></a></div>
+    <nav class="footer-social-links" aria-label="Соцмережі VS Market"><a href="https://www.facebook.com/vsmarketua" target="_blank" rel="noopener noreferrer" aria-label="VS Market у Facebook (нова вкладка)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14 22v-9h3l.5-4H14V6.5c0-1 .3-1.5 1.6-1.5H18V1.4A25 25 0 0 0 14.5 1C11 1 9 3.1 9 6.7V9H6v4h3v9z"/></svg><span>Facebook</span><span aria-hidden="true">↗</span></a><a href="https://www.instagram.com/VSMARKET.UA" target="_blank" rel="noopener noreferrer" aria-label="VS Market у Instagram (нова вкладка)"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/></svg><span>Instagram</span><span aria-hidden="true">↗</span></a><a href="https://www.tiktok.com/@vsmarket.ua" target="_blank" rel="noopener noreferrer" aria-label="VS Market у TikTok (нова вкладка)"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.6 2H12v13.4a3 3 0 1 1-2.5-3V8.8a6.6 6.6 0 1 0 6.1 6.6V8.5a8.4 8.4 0 0 0 5.2 1.8V6.7c-2.7 0-5.2-2.2-5.2-4.7z"/></svg><span>TikTok</span><span aria-hidden="true">↗</span></a></nav>
+  </section>
+  <section class="footer-locations" id="locations" data-locations aria-labelledby="locations-title">
+    <div class="locations-intro"><p class="eyebrow">ЗАВІТАЙТЕ ДО НАС</p><h2 id="locations-title">VS Market поруч.</h2><p class="locations-copy">Подивіться вироби наживо та оберіть рішення для свого дому. Знайдіть зручну точку й прокладіть маршрут.</p><button class="location-locate" data-locate type="button" disabled>Знайти найближчу</button><p class="location-status" data-location-status role="status" aria-live="polite">Завантажуємо точки VS Market…</p><div class="location-list" data-location-list></div></div>
+    <div class="location-map-panel"><div class="location-map-caption"><strong data-map-caption>Наші точки на карті</strong><a href="https://www.google.com/maps/search/VS+Market/@48.3222279,25.8980853,13z/data=!3m1!4b1?hl=uk" target="_blank" rel="noopener noreferrer">Усі точки в Google Maps ↗</a></div><div class="location-map-frame"><iframe data-location-map title="Точки VS Market на карті" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen hidden></iframe></div><p class="location-map-note" data-location-privacy>Можна обрати точку вручну та переглянути автомобільний маршрут у Google Maps.</p><noscript><p>Адреси й маршрути доступні за посиланням «Усі точки в Google Maps».</p></noscript></div>
+  </section>
+  <div class="footer-bottom"><span>VS Market © <span id="year"></span></span><a data-catalog-link href="/catalog">Вікна, двері та фурнітура</a></div><nav class="store-policy-links" aria-label="Умови магазину"><a href="/payment-delivery">Оплата та доставка</a><a href="/warranty-returns">Гарантія та повернення</a><a href="/contacts">Контакти</a><a href="/seller">Реквізити продавця</a></nav></footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "VS Market — локальний сайт",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/server.mjs",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PORT": "8791"
+      },
+      "console": "integratedTerminal",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "serverReadyAction": {
+        "pattern": "VS Market storefront: http://127.0.0.1:([0-9]+)",
+        "uriFormat": "http://127.0.0.1:%s/",
+        "action": "openExternally"
+      },
+      "runtimeExecutable": "${workspaceFolder}/.runtime/node/node.exe"
+    }
+  ]
+}

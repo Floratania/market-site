@@ -1,0 +1,10 @@
+import {readFile,writeFile} from 'node:fs/promises';
+const file=new URL('../public/app.js',import.meta.url);let js=await readFile(file,'utf8');
+const cardAnchor='<div class="card-actions">${multi?';
+if(!js.includes(cardAnchor))throw new Error('Card anchor missing');
+js=js.replace(cardAnchor,'${selectionControls(product)}'+cardAnchor);
+const pageAnchor='<p class="product-price">${escapeHtml(money(product.price,product.currency))}</p>';
+if(!js.includes(pageAnchor))throw new Error('Product anchor missing');
+js=js.replace(pageAnchor,'${selectionControls(product)}'+pageAnchor);
+await writeFile(file,js);
+console.log('Favorite and comparison controls added to product cards and variant pages.');

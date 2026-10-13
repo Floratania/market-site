@@ -1,0 +1,6 @@
+{
+  "acceptOrders": true,
+  "email": {"enabled": true, "to": "tania.flyora@gmail.com", "from": "tania.flyora@gmail.com", "host": "smtp.gmail.com", "port": 465, "secure": true, "user": "tania.flyora@gmail.com", "password": ""},
+  "telegram": {"enabled": true, "botToken": "", "chatId": ""},
+  "novaPoshta": {"apiKey": ""}
+}

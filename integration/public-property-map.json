@@ -1,0 +1,135 @@
+[
+  {
+    "ref": "0x89BE000C29A12DB811EF07AC5DDA4516",
+    "name": "Вид відкривання",
+    "publicKey": "opening",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x89BE000C29A12DB811EF05F8CC8AC3C2",
+    "name": "Вид конструкції",
+    "publicKey": "construction_kind",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x812974867AD9D52511ED60E418FF9319",
+    "name": "Висота",
+    "publicKey": "height",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x812974867AD9D52511ED4F7EEFE300D8",
+    "name": "Колір",
+    "publicKey": "color",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x812974867AD9D52511ED4F7F2B49DC74",
+    "name": "Комплектація",
+    "publicKey": "equipment",
+    "filterable": false,
+    "public": true
+  },
+  {
+    "ref": "0x812974867AD9D52511ED603979ABE1EC",
+    "name": "Наповнення",
+    "publicKey": "filling",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x812974867AD9D52511ED4F7ED6EAE2DD",
+    "name": "Профільна система",
+    "publicKey": "profile_system",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x812974867AD9D52511ED60E28DAE3009",
+    "name": "Тип конструкції",
+    "publicKey": "product_type",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x812974867AD9D52511ED60E41259381F",
+    "name": "Ширина",
+    "publicKey": "width",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x812974867AD9D52511ED4F7F1BC80E42",
+    "name": "Відкривання",
+    "publicKey": "opening_direction",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x89C0000C29A12DB811EF8FA2D57A230D",
+    "name": "Кількість стулок",
+    "publicKey": "leaf_count",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x89BE000C29A12DB811EF06BA89907BC6",
+    "name": "Дизайн конструкції",
+    "publicKey": "design",
+    "filterable": false,
+    "public": true
+  },
+  {
+    "ref": "0x89BE000C29A12DB811EF07A86A0A7140",
+    "name": "Замок",
+    "publicKey": "lock",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x89BE000C29A12DB811EF07A86A0A7141",
+    "name": "Петлі",
+    "publicKey": "hinges",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x89BE000C29A12DB811EF07A87C84DCEA",
+    "name": "Поріг",
+    "publicKey": "threshold",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x89BE000C29A12DB811EF07A8831A8D66",
+    "name": "Ручка",
+    "publicKey": "handle",
+    "filterable": true,
+    "public": true
+  },
+  {
+    "ref": "0x89BE000C29A12DB811EF0D315A819244",
+    "name": "Модель",
+    "publicKey": "model",
+    "filterable": false,
+    "public": true
+  },
+  {
+    "ref": "0x89BE000C29A12DB811EF0E02DC26453B",
+    "name": "Плівка",
+    "publicKey": "film",
+    "filterable": false,
+    "public": true
+  },
+  {
+    "ref": "0x89CD000C29A12DB811F0BA1FA159F2C8",
+    "name": "Вивантажено на сайт",
+    "publicKey": null,
+    "filterable": false,
+    "public": false
+  }
+]

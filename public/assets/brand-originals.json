@@ -1,0 +1,23 @@
+[
+  {
+    "source": "S_F_Red.png",
+    "file": "brand-compact.png",
+    "width": 1246,
+    "height": 701,
+    "sha256": "676e4c71fa67b1ca5054f444cfba74af344defd84f12519c809eb40264ba97d7"
+  },
+  {
+    "source": "vs mark 4 (3).png",
+    "file": "brand-cart-light.png",
+    "width": 218,
+    "height": 217,
+    "sha256": "7b98b46a70ce8592b1bc2b7704991a8a40da02bb7c26e563c6159bb94d26bbb6"
+  },
+  {
+    "source": "vs mark 5 (4).png",
+    "file": "brand-cart-dark.png",
+    "width": 217,
+    "height": 217,
+    "sha256": "d2fe6ca791eae87c4fb6f7a74f1180ac75f28d432423dfc22a43fc8532849bca"
+  }
+]

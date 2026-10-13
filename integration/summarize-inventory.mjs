@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';
+const data=JSON.parse(await fs.readFile(new URL('inventory-sample.local.json',import.meta.url),'utf8'));
+console.log('Hierarchy',data.resultSets[0]);
+console.log('Stock sample count',data.resultSets[1].length);
+console.log('Stock examples',data.resultSets[1].slice(0,6));
+console.log('Sample property definitions', [...new Set(data.resultSets[2].map(row=>row.Property))]);
+console.log('Property examples',data.resultSets[2].filter(row=>row.ReferencedValue || row.StringValue || row.NumberValue).slice(0,8));
+console.log('Data separators',data.resultSets[3]);
+const schema=JSON.parse(await fs.readFile(new URL('bi-schema.local.json',import.meta.url),'utf8'));
+console.log('Physical balance view',schema.resultSets[1].find(row=>row.ViewName==='РегистрыНакопления.ЗапасыНаСкладах.Остатки')?.ViewDefinition);
