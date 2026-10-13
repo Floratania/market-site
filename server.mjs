@@ -135,6 +135,7 @@ async function sourceDescription(sku){
 }
 
 function normalizeProducts(data) {
+  const mediaUrl=value=>{if(!process.env.SALEOR_MEDIA_PUBLIC_ORIGIN||!value)return value;try{const url=new URL(value,'http://localhost');return url.pathname.startsWith('/media/')?new URL(url.pathname,process.env.SALEOR_MEDIA_PUBLIC_ORIGIN).href:value;}catch{return value;}};
   return (data.products?.edges || []).flatMap(({ node }) => (node.variants || []).filter(variant=>node.managementActive!==undefined||variant.pricing?.price?.gross?.amount > 0).map((variant) => {
     const specifications = specificationsFor(node.metadata || [], variant.metadata || []);
     const value = key => specifications.find(item => item.key === key)?.value || '';
@@ -144,9 +145,9 @@ function normalizeProducts(data) {
     description: productDescription(node.description),
     recommendationSettings:recommendationSettings(variant.metadata),
     variantName: variant.name, sku: variant.sku, category: node.category?.name || '',
-    categoryId: node.category?.id || '', image: variantPhotos(variant)[0]?.url || (variant.metadata?.some(m=>m.key==='storefront_media_override'&&m.value)?'':node.variants.length===1 ? node.thumbnail?.url || '' : ''),
+    categoryId: node.category?.id || '', image: mediaUrl(variantPhotos(variant)[0]?.url || (variant.metadata?.some(m=>m.key==='storefront_media_override'&&m.value)?'':node.variants.length===1 ? node.thumbnail?.url || '' : '')),
     imageAlt: variant.media?.[0]?.alt || node.thumbnail?.alt || node.name,
-    media: variantPhotos(variant).map(image=>({id:image.id,url:image.url,alt:image.alt||node.name})),promotion:variantPromotion(variant),
+    media: variantPhotos(variant).map(image=>({id:image.id,url:mediaUrl(image.url),alt:image.alt||node.name})),promotion:variantPromotion(variant),
     price: variant.pricing?.price?.gross?.amount ?? null,
     currency: variant.pricing?.price?.gross?.currency || 'UAH',
     availableTotal: variant.quantityAvailable ?? null,

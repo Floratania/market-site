@@ -1,0 +1,5 @@
+.site-header .theme-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;height:44px;min-height:44px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);}
+.site-header .theme-toggle:hover{border-color:var(--red-text);background:var(--soft);}
+.site-header .theme-toggle:focus-visible{outline:2px solid var(--red-text);outline-offset:3px;}
+.site-header .theme-toggle .ui-icon{width:22px;height:22px;}
+@media(max-width:760px){.site-header .theme-toggle{width:44px;height:44px;padding:8px;}}

@@ -31,6 +31,8 @@
   try{response=await fetch('/api/auth/'+action,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});data=await response.json();}
   catch{throw new Error('Не вдалося з’єднатися. Перевірте інтернет і спробуйте ще раз.');}
   if(!response.ok)throw new Error(data.error || 'Не вдалося виконати дію.');
+  if(action==='login')await window.VSMarketAccountCart?.(data.user);
+  if(action==='logout')await window.VSMarketAccountCart?.(null);
   return data;
  }
  function bind(action,callback,transform=value=>value){

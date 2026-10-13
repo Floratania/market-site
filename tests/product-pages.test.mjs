@@ -13,6 +13,7 @@ async function page(path, catalog, initialSaved=[]) {
  const url=new URL(path,'http://localhost');
  const location={href:url.href,search:url.search,assign(value){this.assigned=value},replace(value){this.replaced=value}};
  const context=vm.createContext({document:{title:'',querySelector:element,querySelectorAll:()=>[],addEventListener(name,fn){changes[name]=fn},documentElement:{dataset:{theme:'dark'}},body:{style:{}}},location,history:{replaceState(_state,_title,value){location.href=new URL(value,location.href).href}},localStorage:{getItem:key=>saved.get(key)||null,setItem:(key,value)=>saved.set(key,value)},URL,URLSearchParams,Intl,Date,Map,Set,matchMedia:()=>({matches:false}),fetch:async url=>({ok:true,json:async()=>url==='/catalog-demo.json' ? demoRows : catalog})});
+ context.window=context;context.addEventListener=()=>{};context.setInterval=()=>0;context.setTimeout=()=>0;context.clearTimeout=()=>{};context.localStorage.removeItem=key=>saved.delete(key);
  vm.runInContext(app,context); await vm.runInContext('catalogReady',context);
  return {element,context,location,changes,saved};
 }
@@ -28,7 +29,7 @@ test('every demo item has a direct page and related items link to their own page
  }
  const result=await page('/products/demo-window-1?demo=1');
  assert.match(result.element('#product-page').innerHTML,/href="\/products\/demo-mesh-1\?demo=1"/);
- assert.match(result.element('#product-page').innerHTML,/Дорожчі альтернативи/);
+ assert.match(result.element('#product-page').innerHTML,/Кращі альтернативи/);
  vm.runInContext("addProduct('demo-window-1')",result.context);
  assert.equal(result.element('#cart-count').textContent,1);
  assert.match(result.saved.get('vs-market-cart-v1'),/demo-window-1/);

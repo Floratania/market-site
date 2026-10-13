@@ -1,0 +1,18 @@
+[Unit]
+Description=VS Market storefront
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=simple
+User=vsmarket
+Group=vsmarket
+WorkingDirectory=/opt/market-site
+ExecStart=/usr/bin/node --env-file=/opt/market-site/.env /opt/market-site/server.mjs
+Restart=on-failure
+RestartSec=5
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
